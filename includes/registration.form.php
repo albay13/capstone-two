@@ -1,13 +1,20 @@
 <form class="text-light">
+<div class="divider-new">
+		<h3 >Login Details</h3>
+</div>
 <div class="form-group row">
 <div class="col-lg-12">
-	<label class="control-label">Username or email</label>
+	<label class="control-label">Username</label>
 	<input type="text" name="" placeholder="Enter username or email" class="form-control">
 </div>
 </div>
 <div class="form-group row">
-<div class="col-lg-12">
+<div class="col-lg-6">
 	<label class="control-label">Password</label>
+	<input type="password" name="" placeholder="Enter password" class="form-control">
+</div>
+<div class="col-lg-6">
+	<label class="control-label">Confirm Password</label>
 	<input type="password" name="" placeholder="Enter password" class="form-control">
 </div>
 </div>
