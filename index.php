@@ -1,5 +1,8 @@
 <?php 
 include 'core/init.php';
+if(isset($_SESSION["id"])){
+	header('Location:withLogin/index.php');
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -14,7 +17,7 @@ include 'core/init.php';
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Dosis|Merienda+One" rel="stylesheet">
 </head>
-<body>
+<body class="without-login">
 	<?php 
 		include 'includes/nav.html';
 	?>
@@ -47,4 +50,6 @@ include 'core/init.php';
 	<script type="text/javascript" src="assets/js/popper.min.js"></script>
 	<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="assets/js/mdb.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/jquery.validate.js"></script>
+	<script src="assets/js/login_validation.js"></script>
 </html>

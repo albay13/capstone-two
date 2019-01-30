@@ -4,6 +4,8 @@
 }
 body{
 	font-family: 'Dosis', sans-serif;
+}
+body.without-login{
 	background-image: url("../images/login-bg.jpg");
 	background-repeat: no-repeat;
 	width: 100%;
@@ -36,4 +38,11 @@ body{
   flex: 1;
   margin: 0 0 0 .45em;
 
+}
+.help-block{
+	color: #dc3545;
+	font-style: italic;
+}
+.content-wrapper{
+	background-color:#ededed;
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 29, 2019 at 01:05 AM
+-- Generation Time: Jan 30, 2019 at 01:12 AM
 -- Server version: 10.1.34-MariaDB-0ubuntu0.18.04.1
 -- PHP Version: 7.2.10-0ubuntu0.18.04.1
 
@@ -30,9 +30,16 @@ CREATE TABLE `accounts_tbl` (
   `id` int(7) NOT NULL,
   `username` varchar(30) NOT NULL,
   `password` varchar(30) NOT NULL,
-  `access_level` varchar(30) NOT NULL,
+  `user_level` varchar(30) NOT NULL,
   `accounts_status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `accounts_tbl`
+--
+
+INSERT INTO `accounts_tbl` (`id`, `username`, `password`, `user_level`, `accounts_status`) VALUES
+(1, 'noli', '081314jee', 'administrator', 1);
 
 -- --------------------------------------------------------
 
@@ -58,11 +65,18 @@ CREATE TABLE `personal_info_tbl` (
   `first_name` varchar(30) NOT NULL,
   `middle_name` varchar(30) NOT NULL,
   `last_name` varchar(30) NOT NULL,
-  `birthdate` datetime NOT NULL,
+  `birthdate` date NOT NULL,
   `email` varchar(100) NOT NULL,
   `contact_number` varchar(11) NOT NULL,
   `info_status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `personal_info_tbl`
+--
+
+INSERT INTO `personal_info_tbl` (`id`, `login_id`, `first_name`, `middle_name`, `last_name`, `birthdate`, `email`, `contact_number`, `info_status`) VALUES
+(1, 1, 'Noli', 'Begino', 'Albay', '1995-10-11', 'pahiram.albay@gmail.com', '09124583714', 1);
 
 -- --------------------------------------------------------
 
@@ -116,7 +130,8 @@ ALTER TABLE `department_tbl`
 -- Indexes for table `personal_info_tbl`
 --
 ALTER TABLE `personal_info_tbl`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `login_id` (`login_id`);
 
 --
 -- Indexes for table `ticket_tbl`
@@ -132,7 +147,7 @@ ALTER TABLE `ticket_tbl`
 -- AUTO_INCREMENT for table `accounts_tbl`
 --
 ALTER TABLE `accounts_tbl`
-  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `department_tbl`
 --
@@ -142,12 +157,22 @@ ALTER TABLE `department_tbl`
 -- AUTO_INCREMENT for table `personal_info_tbl`
 --
 ALTER TABLE `personal_info_tbl`
-  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `ticket_tbl`
 --
 ALTER TABLE `ticket_tbl`
   MODIFY `id` int(7) NOT NULL AUTO_INCREMENT;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `personal_info_tbl`
+--
+ALTER TABLE `personal_info_tbl`
+  ADD CONSTRAINT `personal_info_tbl_ibfk_1` FOREIGN KEY (`login_id`) REFERENCES `accounts_tbl` (`id`);
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
