@@ -16,73 +16,52 @@
                     <li class="heading text-uppercase">Services</li>
                     <li>
                         <a href="javascript:;"><i class="sidebar-item-icon fa fa-bookmark"></i>
-                            <span class="nav-label">Basic UI</span><i class="fa fa-angle-left arrow"></i></a>
+                            <span class="nav-label">Tickets</span><i class="fa fa-angle-left arrow"></i></a>
                         <ul class="nav-2-level collapse">
                             <li>
-                                <a href="colors.html">Colors</a>
+                                <a href="colors.html">All Tickets</a>
                             </li>
                             <li>
-                                <a href="typography.html">Typography</a>
+                                <a href="typography.html">Categories</a>
                             </li>
                             <li>
-                                <a href="panels.html">Panels</a>
+                                <a href="panels.html">Custom Fields</a>
                             </li>
                             <li>
-                                <a href="buttons.html">Buttons</a>
+                                <a href="buttons.html">Custom Status</a>
                             </li>
                             <li>
-                                <a href="tabs.html">Tabs</a>
-                            </li>
-                            <li>
-                                <a href="alerts_tooltips.html">Alerts &amp; Tooltips</a>
-                            </li>
-                            <li>
-                                <a href="badges_progress.html">Badges &amp; Progress</a>
-                            </li>
-                            <li>
-                                <a href="lists.html">List</a>
-                            </li>
-                            <li>
-                                <a href="cards.html">Card</a>
+                                <a href="tabs.html">Custom Views</a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="javascript:;"><i class="sidebar-item-icon fa fa-edit"></i>
-                            <span class="nav-label">Forms</span><i class="fa fa-angle-left arrow"></i></a>
+                        <a href="javascript:;"><i class="sidebar-item-icon fa fa-book"></i>
+                            <span class="nav-label">Knowledge Base</span><i class="fa fa-angle-left arrow"></i></a>
                         <ul class="nav-2-level collapse">
                             <li>
-                                <a href="form_basic.html">Basic Forms</a>
+                                <a href="form_basic.html">Articles</a>
                             </li>
                             <li>
-                                <a href="form_advanced.html">Advanced Plugins</a>
-                            </li>
-                            <li>
-                                <a href="form_masks.html">Form input masks</a>
-                            </li>
-                            <li>
-                                <a href="form_validation.html">Form Validation</a>
-                            </li>
-                            <li>
-                                <a href="text_editors.html">Text Editors</a>
+                                <a href="form_advanced.html">Categories</a>
                             </li>
                         </ul>
                     </li>
                     <li>
                         <a href="javascript:;"><i class="sidebar-item-icon fa fa-table"></i>
-                            <span class="nav-label">Tables</span><i class="fa fa-angle-left arrow"></i></a>
+                            <span class="nav-label">FAQs</span><i class="fa fa-angle-left arrow"></i></a>
                         <ul class="nav-2-level collapse">
                             <li>
-                                <a href="table_basic.html">Basic Tables</a>
+                                <a href="table_basic.html">FAQ</a>
                             </li>
                             <li>
-                                <a href="datatables.html">Datatables</a>
+                                <a href="datatables.html">Categories</a>
                             </li>
                         </ul>
                     </li>
                     <li>
                         <a href="javascript:;"><i class="sidebar-item-icon fa fa-bar-chart"></i>
-                            <span class="nav-label">Charts</span><i class="fa fa-angle-left arrow"></i></a>
+                            <span class="nav-label">Reports</span><i class="fa fa-angle-left arrow"></i></a>
                         <ul class="nav-2-level collapse">
                             <li>
                                 <a href="charts_flot.html">Flot Charts</a>
@@ -97,20 +76,6 @@
                                 <a href="charts_sparkline.html">Sparkline Charts</a>
                             </li>
                         </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:;"><i class="sidebar-item-icon fa fa-map"></i>
-                            <span class="nav-label">Maps</span><i class="fa fa-angle-left arrow"></i></a>
-                        <ul class="nav-2-level collapse">
-                            <li>
-                                <a href="maps_vector.html">Vector maps</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a class="active" href="icons.html"><i class="sidebar-item-icon fa fa-smile-o"></i>
-                            <span class="nav-label">Icons</span>
-                        </a>
                     </li>
                     <li class="heading text-uppercase">Access Privileges</li>
                     <li>

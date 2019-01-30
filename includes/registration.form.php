@@ -4,7 +4,7 @@
 		$middle_name = mysqli_real_escape_string($con,$_POST["middle_name"]);
 		$last_name = mysqli_real_escape_string($con,$_POST["last_name"]);
 		$birthdate = mysqli_real_escape_string($con,$_POST["birthdate"]);
-		$email = mysqli_real_escape_string($con,$_POST["middle_name"]);
+		$email = mysqli_real_escape_string($con,$_POST["email"]);
 		$contact_number = mysqli_real_escape_string($con,$_POST["contact_number"]);
 		$username = mysqli_real_escape_string($con,$_POST["username"]);
 		$user_level = mysqli_real_escape_string($con,$_POST["user_level"]);

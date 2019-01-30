@@ -46,3 +46,6 @@ body.without-login{
 .content-wrapper{
 	background-color:#ededed;
 }
+.page-heading{
+  margin-top: 4rem;
+}

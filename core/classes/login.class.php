@@ -3,6 +3,7 @@ class login{
 	public $con;
 	function __construct($con){
 		$this->con = $con;
+		$this->if_logout();
 	}
 	function check_user($username,$password){
 		$query = "SELECT * FROM accounts_tbl where username = '$username' AND password = '$password'";
@@ -15,6 +16,12 @@ class login{
 			return true;
 		}else{
 			return false;
+		}
+	}
+	function if_logout(){
+		if(isset($_GET["logout"])){
+			$this->logout();
+			header('Location:../index.php');
 		}
 	}
 	function logout(){

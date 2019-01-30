@@ -26,8 +26,7 @@ include '../core/init.php';
 		?>
 		<div class="content-wrapper">
 			<div class="page-heading">
-				<br/><br/>
-                <h1 class="page-title">Add Accounts</h1>
+				<h1 class="page-title">Add Accounts</h1>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
                         <a href="index.html"><i class="fa fa-home font-20"></i> Home</a>
