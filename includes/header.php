@@ -4,7 +4,7 @@
                     <span class="brand">Rephil 
                          &nbsp;<span class="brand-tip"> Help Desk</span>
                     </span>
-                    <span class="brand-mini">AC</span>
+                    <span class="brand-mini">RPH</span>
                 </a>
             </div>
             <div class="flexbox flex-1">

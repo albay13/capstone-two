@@ -16,13 +16,17 @@
 <div class="form-group row">
 <div class="col-lg-12">
 	<label class="control-label">Username</label>
-	<input type="text" name="username" id="username" placeholder="Enter username or email" class="form-control">
+	<div class="form-input">
+		<input type="text" name="username" id="username" placeholder="Enter username or email" class="form-control">
+	</div>
 </div>
 </div>
 <div class="form-group row">
 <div class="col-lg-12">
 	<label class="control-label">Password</label>
+	<div class="form-input">
 	<input type="password" id="password" name="password" placeholder="Enter password" class="form-control">
+	</div>
 </div>
 </div>
 <div class="custom-control custom-checkbox mb-3">

@@ -18,7 +18,7 @@
 			"contact_number" => $contact_number,
 			"info_status" => '1',
 		);
-		$main->check_reg($username,$password,$user_level,"personal_info_tbl",$data);
+		$crud->check_reg($username,$password,$user_level,"personal_info_tbl",$data);
 	}
 
 ?>

@@ -21,7 +21,7 @@ class login{
 	function if_logout(){
 		if(isset($_GET["logout"])){
 			$this->logout();
-			header('Location:../index.php');
+			header('Location:../../index.php');
 		}
 	}
 	function logout(){

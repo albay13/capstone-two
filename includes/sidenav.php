@@ -9,26 +9,26 @@
                 </div>
                 <ul class="side-menu metismenu">
                     <li>
-                        <a href="index.html"><i class="sidebar-item-icon fa fa-th-large"></i>
+                        <a href="index.php"><i class="sidebar-item-icon fa fa-th-large"></i>
                             <span class="nav-label">Dashboard</span>
                         </a>
                     </li>
                     <li class="heading text-uppercase">Services</li>
                     <li>
-                        <a href="javascript:;"><i class="sidebar-item-icon fa fa-bookmark"></i>
+                        <a href="javascript:;"><i class="sidebar-item-icon fa fa-send"></i>
                             <span class="nav-label">Tickets</span><i class="fa fa-angle-left arrow"></i></a>
                         <ul class="nav-2-level collapse">
                             <li>
-                                <a href="colors.html">All Tickets</a>
+                                <a href="<?php echo base_url.'withLogin/tickets/ticket.php'; ?>">All Tickets</a>
                             </li>
                             <li>
-                                <a href="typography.html">Categories</a>
+                                <a href="<?php echo base_url.'withLogin/tickets/categories.php'; ?>">Categories</a>
                             </li>
                             <li>
                                 <a href="panels.html">Custom Fields</a>
                             </li>
                             <li>
-                                <a href="buttons.html">Custom Status</a>
+                                <a href="<?php echo base_url.'withLogin/tickets/status.php'; ?>">Custom Status</a>
                             </li>
                             <li>
                                 <a href="tabs.html">Custom Views</a>
@@ -83,7 +83,7 @@
                             <span class="nav-label">Manage Accounts</span><i class="fa fa-angle-left arrow"></i></a>
                             <ul class="nav-2-level collapse">
                             <li>
-                                <a href="add_account.php"> Add Account</a>
+                                <a href="<?php echo base_url.'withLogin/add_account.php'; ?>"> Add Account</a>
                             </li>
                             <li>
                                 <a href="mail_view.html">Edit Profile</a>

@@ -25,8 +25,8 @@ include '../core/init.php';
 			include '../includes/sidenav.php';
 		?>
 		<div class="content-wrapper">
-			<div class="page-heading">
-				<h1 class="page-title">Add Accounts</h1>
+            <div class="page-heading">
+				<h1 class="page-title"><i class="fa fa-user"></i> Add Accounts</h1>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
                         <a href="index.html"><i class="fa fa-home font-20"></i> Home</a>
@@ -71,5 +71,5 @@ include '../core/init.php';
  	<script src="<?php echo base_url.'assets/js/app.min.js'; ?>" type="text/javascript"></script>
  	<script src="<?php echo base_url.'assets/js/jquery.smartWizard.min.js'; ?>"></script>
  	<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
- 	<script src="<?php echo base_url.'assets/js/script.js'; ?>"></script>
+ 	<script src="<?php echo base_url.'assets/js/custom_smartwizard.js'; ?>"></script>
 </html>

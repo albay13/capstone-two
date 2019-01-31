@@ -3,7 +3,7 @@
 	padding: 0;
 }
 body{
-	font-family: 'Dosis', sans-serif;
+	font-family: 'Dosis' !important, sans-serif;
 }
 body.without-login{
 	background-image: url("../images/login-bg.jpg");
@@ -46,6 +46,6 @@ body.without-login{
 .content-wrapper{
 	background-color:#ededed;
 }
-.page-heading{
-  margin-top: 4rem;
+.form-input.has-error{
+    color: red;
 }

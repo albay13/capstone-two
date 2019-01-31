@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 4.6.6deb5
+-- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jan 30, 2019 at 03:57 PM
--- Server version: 10.1.13-MariaDB
--- PHP Version: 7.0.8
+-- Host: localhost:3306
+-- Generation Time: Jan 31, 2019 at 12:45 AM
+-- Server version: 10.1.34-MariaDB-0ubuntu0.18.04.1
+-- PHP Version: 7.2.10-0ubuntu0.18.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -40,7 +40,31 @@ CREATE TABLE `accounts_tbl` (
 
 INSERT INTO `accounts_tbl` (`id`, `username`, `password`, `user_level`, `accounts_status`) VALUES
 (1, 'noli', '081314jee', 'administrator', 1),
-(2, 'noli13', '80b153bf05d4dc063405a8d38d3def84', 'administrator', 1);
+(2, 'noli13', '80b153bf05d4dc063405a8d38d3def84', 'administrator', 1),
+(3, 'jee', '32674a705ba28b5b5319a687829f0526', 'administrator', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categories_tbl`
+--
+
+CREATE TABLE `categories_tbl` (
+  `id` int(7) NOT NULL,
+  `category_name` varchar(100) NOT NULL,
+  `category_description` text NOT NULL,
+  `category_icon` varchar(100) NOT NULL,
+  `parent_category` varchar(100) NOT NULL,
+  `user_group` varchar(100) NOT NULL,
+  `category_status` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `categories_tbl`
+--
+
+INSERT INTO `categories_tbl` (`id`, `category_name`, `category_description`, `category_icon`, `parent_category`, `user_group`, `category_status`) VALUES
+(1, 'Technical Support', '<p>This is for technical support.</p>', '292767721.png', 'none', 'technical', 1);
 
 -- --------------------------------------------------------
 
@@ -92,7 +116,31 @@ CREATE TABLE `personal_info_tbl` (
 
 INSERT INTO `personal_info_tbl` (`id`, `login_id`, `first_name`, `middle_name`, `last_name`, `birthdate`, `email`, `contact_number`, `info_status`) VALUES
 (1, 1, 'Noli', 'Begino', 'Albay', '1995-10-11', 'pahiram.albay@gmail.com', '09124583714', 1),
-(10, 2, 'Noli', 'Begino', 'Albay', '1995-10-11', 'noli.albay@gmail.com', '09124583714', 1);
+(10, 2, 'Noli', 'Begino', 'Albay', '1995-10-11', 'noli.albay@gmail.com', '09124583714', 1),
+(11, 3, 'Jeezele', 'Gomez', 'Whiteside', '1996-07-03', 'rephil.whiteside@gmail.com', '09124583714', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `status_tbl`
+--
+
+CREATE TABLE `status_tbl` (
+  `id` int(7) NOT NULL,
+  `status_name` varchar(100) NOT NULL,
+  `bg_color` varchar(50) NOT NULL,
+  `text_color` varchar(50) NOT NULL,
+  `visibility_status` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `status_tbl`
+--
+
+INSERT INTO `status_tbl` (`id`, `status_name`, `bg_color`, `text_color`, `visibility_status`) VALUES
+(1, 'New', 'dc3545', 'f8f9fa', 1),
+(2, 'In Progress', '28a745', 'f8f9fa', 1),
+(3, 'Closed', '17a2b8', 'f8f9fa', 1);
 
 -- --------------------------------------------------------
 
@@ -105,9 +153,11 @@ CREATE TABLE `ticket_info_tbl` (
   `ticket_id` int(7) NOT NULL,
   `ticket_title` varchar(70) NOT NULL,
   `query` text NOT NULL,
+  `ticket_priority` varchar(100) NOT NULL,
   `attachment` text NOT NULL,
   `action_taken` varchar(100) NOT NULL,
   `ticket_status` varchar(100) NOT NULL,
+  `ticket_notes` text NOT NULL,
   `visibility_status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -137,6 +187,12 @@ ALTER TABLE `accounts_tbl`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `categories_tbl`
+--
+ALTER TABLE `categories_tbl`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `department_tbl`
 --
 ALTER TABLE `department_tbl`
@@ -148,6 +204,12 @@ ALTER TABLE `department_tbl`
 ALTER TABLE `personal_info_tbl`
   ADD PRIMARY KEY (`id`),
   ADD KEY `login_id` (`login_id`);
+
+--
+-- Indexes for table `status_tbl`
+--
+ALTER TABLE `status_tbl`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `ticket_tbl`
@@ -163,7 +225,12 @@ ALTER TABLE `ticket_tbl`
 -- AUTO_INCREMENT for table `accounts_tbl`
 --
 ALTER TABLE `accounts_tbl`
-  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `categories_tbl`
+--
+ALTER TABLE `categories_tbl`
+  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `department_tbl`
 --
@@ -173,7 +240,12 @@ ALTER TABLE `department_tbl`
 -- AUTO_INCREMENT for table `personal_info_tbl`
 --
 ALTER TABLE `personal_info_tbl`
-  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+--
+-- AUTO_INCREMENT for table `status_tbl`
+--
+ALTER TABLE `status_tbl`
+  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `ticket_tbl`
 --
