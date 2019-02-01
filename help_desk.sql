@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6deb5
--- https://www.phpmyadmin.net/
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
--- Host: localhost:3306
--- Generation Time: Feb 01, 2019 at 12:52 AM
--- Server version: 10.1.34-MariaDB-0ubuntu0.18.04.1
--- PHP Version: 7.2.10-0ubuntu0.18.04.1
+-- Host: 127.0.0.1
+-- Generation Time: Feb 01, 2019 at 04:36 PM
+-- Server version: 10.1.13-MariaDB
+-- PHP Version: 7.0.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -168,6 +168,21 @@ INSERT INTO `sub_categories_tbl` (`id`, `parent_category_id`, `sub_category_name
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `ticket_history_tbl`
+--
+
+CREATE TABLE `ticket_history_tbl` (
+  `id` int(11) NOT NULL,
+  `ticket_id` int(7) NOT NULL,
+  `assisting_personnel_id` int(7) NOT NULL,
+  `action` text NOT NULL,
+  `date_made` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `history_status` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `ticket_info_tbl`
 --
 
@@ -192,6 +207,22 @@ INSERT INTO `ticket_info_tbl` (`id`, `ticket_id`, `sub_category_id`, `ticket_tit
 (1, 1, 2, 'zxczxcz', '<p>asfsafasf</p>', 'low', '1403040964.png', '1', '<p>fsafasf</p>', 1),
 (2, 1, 2, 'cccc', '<p>zxczxczxc</p>', 'high', '366912717.png', '1', '<p>asfasfasfasfasfas</p>', 1),
 (3, 1, 1, 'xxxx', '<p>asfasasfasf</p>', 'high', '1133603663.png', '3', '<p>asfasfasfasf</p>', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ticket_reply_tbl`
+--
+
+CREATE TABLE `ticket_reply_tbl` (
+  `id` int(7) NOT NULL,
+  `ticket_id` int(7) NOT NULL,
+  `assisting _personnel_id` int(7) NOT NULL,
+  `reply` text NOT NULL,
+  `uploaded_file` text NOT NULL,
+  `date_reply` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `reply_status` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -259,9 +290,21 @@ ALTER TABLE `sub_categories_tbl`
   ADD KEY `parent_category_id` (`parent_category_id`);
 
 --
+-- Indexes for table `ticket_history_tbl`
+--
+ALTER TABLE `ticket_history_tbl`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `ticket_info_tbl`
 --
 ALTER TABLE `ticket_info_tbl`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ticket_reply_tbl`
+--
+ALTER TABLE `ticket_reply_tbl`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -305,10 +348,20 @@ ALTER TABLE `status_tbl`
 ALTER TABLE `sub_categories_tbl`
   MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
+-- AUTO_INCREMENT for table `ticket_history_tbl`
+--
+ALTER TABLE `ticket_history_tbl`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `ticket_info_tbl`
 --
 ALTER TABLE `ticket_info_tbl`
   MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `ticket_reply_tbl`
+--
+ALTER TABLE `ticket_reply_tbl`
+  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `ticket_tbl`
 --

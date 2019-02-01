@@ -30,7 +30,7 @@ include '../../core/init.php';
 		<div class="content-wrapper">
 			 <div class="page-content fade-in-up">
             	 <div class="row">
-                     <div class="col-lg-7">
+                     <div class="col-lg-8">
                         <!-- Ticket Content -->
                         <?php
                         $ticket_id = $_GET["ticket_id"];
@@ -66,11 +66,37 @@ include '../../core/init.php';
                                             </div>
                                         </div>
                                         <div class="ibox-body">
-                                           
+                                          <form>
+                                              <div class="form-group row"> 
+                                                  <div class="col-lg-12">
+                                                      <textarea style="height: 200px;" class="form-control tinymce"></textarea>
+                                                  </div>
+                                              </div>
+                                              <div class="form-group row"> 
+                                                  <div class="col-lg-12">
+                                                      <label class="control-label font-weight-bold">Attach File</label>
+                                                      <input type="file" name="" class="form-control ">
+                                                  </div>
+                                              </div>
+                                              <div class="form-group row"> 
+                                                  <div class="col-lg-12">
+                                                      <label class="control-label font-weight-bold">Default Responses</label>
+                                                      <select class="form-control">
+                                                          <option>zxczxc</option>
+                                                          <option>xcxc</option>
+                                                      </select>
+                                                  </div>
+                                              </div>
+                                              <div class="form-group row">
+                                                  <div class="col-lg-12">
+                                                      <button class="btn btn-primary form-control">Reply</button>
+                                                  </div>
+                                              </div>
+                                          </form> 
                                         </div>
                                     </div>
                 </div>
-                <div class="col-lg-5">
+                <div class="col-lg-4">
                         <!-- Ticket Details -->    
                         <div class="ibox">
                             <div class="ibox-head">
@@ -81,13 +107,54 @@ include '../../core/init.php';
                                 </div>
                             </div>
                             <div class="ibox-body">
-                               <table>
+                               <table class="table table">
                                    <tbody>
                                        <tr>
-                                           <td></td>
+                                           <td style="text-align: right; width: 50%;">#</td>
+                                           <td style="width: 50%;">#</td>
+                                       </tr>
+                                       <tr>
+                                           <td style="text-align: right; width: 50%;">Username</td>
+                                           <td style="width: 50%;">#</td>
+                                       </tr>
+                                       <tr>
+                                           <td style="text-align: right; width: 50%;">Email</td>
+                                           <td style="width: 50%;">#</td>
+                                       </tr>
+                                       <tr>
+                                           <td style="text-align: right; width: 50%;">Name</td>
+                                           <td style="width: 50%;">#</td>
+                                       </tr>
+                                       <tr>
+                                           <td style="text-align: right; width: 50%;">Created</td>
+                                           <td>#</td>
+                                       </tr>
+                                       <tr>
+                                           <td style="text-align: right;">Category</td>
+                                           <td>#</td>
                                        </tr>
                                    </tbody>
                                </table>
+                            </div>
+                            <div class="ibox-footer p-2 pl-4">
+                               <div style="text-transform: capitalize;" class="ibox-title"><b>Actions</b></div>
+                              <div class="container">
+                                  <div class=" row">
+                                    <div class="btn-group mr-1">
+                                      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Action
+                                      </button>
+                                      <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">New</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <a class="dropdown-item" href="#">Something else here</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#">Separated link</a>
+                                      </div>
+                                    </div>
+                                  <a class="btn btn-danger btn-sm text-light"><i class="fa fa-trash"></i></a>
+                              </div>
+                              </div>
                             </div>
                         </div>
                         <!-- Ticket History -->
