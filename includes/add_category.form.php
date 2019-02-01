@@ -22,7 +22,15 @@
     <div class="col-lg-9 form-input">
         <div class="form-input">
         <select class="form-control" id="parent_category" name="parent_category" required>
-            <option value="none">None</option>
+            <option value="0">None</option>
+            <?php
+                $parent = $crud->fetch_data("SELECT * FROM categories_tbl where parent_category = 'none'");
+                foreach($parent as $row_parent){
+            ?>
+                <option value="<?php echo $row_parent["id"]; ?>"><?php echo $row_parent["category_name"]; ?></option>
+            <?php
+                }
+            ?>
         </select>
         </div>
     </div>
@@ -41,8 +49,14 @@
     <div class="col-lg-9">
         
         <select class="form-control multiple_select" id="user_group" name="user_group[]" style="width: 100%;" multiple="" required>
-             <option value="agent">User Agent</option>
-             <option value="technical">Technical Support</option>
+             <?php
+                $parent = $crud->fetch_data("SELECT * FROM categories_tbl where parent_category = 'none'");
+                foreach($parent as $row_parent){
+            ?>
+                <option value="<?php echo $row_parent["id"]; ?>"><?php echo $row_parent["category_name"]; ?></option>
+            <?php
+                }
+            ?>
         </select>
         <div class="form-input">
         </div>

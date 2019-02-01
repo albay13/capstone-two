@@ -15,13 +15,18 @@ include '../../core/init.php';
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url.'assets/font-awesome/css/font-awesome.min.css';?>">
 	<link href="https://fonts.googleapis.com/css?family=Dosis|Merienda+One" rel="stylesheet">
 	<link href="<?php echo base_url.'assets/themify-icons/css/themify-icons.css';?>" rel="stylesheet" />
+    <style type="text/css">
+        .toolbar{
+            float: right;
+        }
+    </style>
 </head>
 <body class="fixed-navbar">
 	<div class="page-wrapper">
 		<?php
 			include '../../includes/header.php';
 			include '../../includes/sidenav.php';
-		?>
+        ?>
 		<div class="content-wrapper">
 			<div class="page-heading">
 				<h1 class="page-title"><i class="fa fa-send"></i> Tickets</h1>
@@ -45,12 +50,12 @@ include '../../core/init.php';
                                 </div>
                             </div>
                             <div class="ibox-body">
-                            	 <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">
+                            	 <table class="table table-striped table-bordered table-hover" id="ticket_tbl" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
                                     <th>Title</th>
-                                    <th>Priority</th>
-                                    <th>Status</th>
+                                    <th style="text-align: center;">Priority</th>
+                                    <th style="text-align: center;">Status</th>
                                     <th>Category</th>
                                     <th>Last Reply</th>
                                     <th>Actions</th>
@@ -58,39 +63,40 @@ include '../../core/init.php';
                             </thead>
                             <tfoot>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Position</th>
-                                    <th>Office</th>
-                                    <th>Age</th>
-                                    <th>Start date</th>
-                                    <th>Salary</th>
+                                    <th>Title</th>
+                                    <th style="text-align: center;">Priority</th>
+                                    <th style="text-align: center;">Status</th>
+                                    <th>Category</th>
+                                    <th>Last Reply</th>
+                                    <th>Actions</th>
                                 </tr>
                             </tfoot>
                             <tbody>
+                                <?php
+                                    $tickets = $crud->fetch_data("SELECT * FROM ticket_info_tbl ");
+                                    $status = $crud->fetch_data("SELECT * FROM status_tbl ORDER BY status_name");
+                                    foreach($tickets as $rows){
+                                ?>
                                 <tr>
-                                    <td>Yuri Berry</td>
-                                    <td>Chief Marketing Officer (CMO)</td>
-                                    <td>New York</td>
-                                    <td>40</td>
-                                    <td>2009/06/25</td>
-                                    <td>$675,000</td>
+                                    <td><?php echo $rows["ticket_title"]; ?></td>
+                                    <td style="text-align: center;"><?php $main->priority_badge($rows["ticket_priority"]); ?></td>
+                                    <?php 
+                                        foreach($status as $row_stats){
+                                            if($rows["ticket_status"] == $row_stats["id"]){
+                                    ?>
+                                         <td class="text-center" style="color:<?php echo "#".$row_stats["text_color"]; ?>;background-color:<?php echo "#".$row_stats["bg_color"]; ?>"><?php echo $row_stats["status_name"]; ?></td>
+                                    <?php        
+                                            }
+                                        }
+
+                                    ?>
+                                    <td><?php echo $rows["ticket_title"]; ?></td>
+                                    <td><?php echo $rows["ticket_title"]; ?></td>
+                                    <td><a href="view_ticket.php?ticket_id=<?php echo $rows["id"]; ?>" data-toggle="tooltip" title="Views" class="btn btn-warning btn-sm text-light"><i class="fa fa-eye"></i></a> | <a href="view_ticket.php?ticket_id=<?php echo $rows["id"]; ?>" data-toggle="tooltip" title="Edit" class="btn btn-info btn-sm text-light"><i class="fa fa-cog"></i></a> | <a href="view_ticket.php?ticket_id=<?php echo $rows["id"]; ?>" data-toggle="tooltip" title="Delete" class="btn btn-danger btn-sm text-light"><i class="fa fa-trash"></i></a></td>
                                 </tr>
-                                <tr>
-                                    <td>Caesar Vance</td>
-                                    <td>Pre-Sales Support</td>
-                                    <td>New York</td>
-                                    <td>21</td>
-                                    <td>2011/12/12</td>
-                                    <td>$106,450</td>
-                                </tr>
-                                <tr>
-                                    <td>Doris Wilder</td>
-                                    <td>Sales Assistant</td>
-                                    <td>Sidney</td>
-                                    <td>23</td>
-                                    <td>2010/09/20</td>
-                                    <td>$85,600</td>
-                                </tr>
+                                <?php
+                                    }
+                                ?>
                             </tbody>
                         	</table>
                             </div>
@@ -115,16 +121,13 @@ include '../../core/init.php';
  	<script src="<?php echo base_url.'assets/js/script.js'; ?>"></script>
  	 <script type="text/javascript">
         $(function() {
-            $('#example-table').DataTable({
-                pageLength: 10,
-                //"ajax": './assets/demo/data/table_data.json',
-                /*"columns": [
-                    { "data": "name" },
-                    { "data": "office" },
-                    { "data": "extn" },
-                    { "data": "start_date" },
-                    { "data": "salary" }
-                ]*/
+            var table = $('#ticket_tbl').DataTable({
+              "dom": '<"toolbar">frtip',
+            });
+            $("div.toolbar")
+                     .html('<a class="btn btn-primary btn-sm ml-2" href="add_ticket.php" id="add_ticket"><i class="fa fa-plus"></i> Add Ticket</a>');
+            $("#add_status").on('click',function(){
+                    $("#add_category_modal").modal("show");
             });
         })
     </script>

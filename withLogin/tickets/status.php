@@ -41,9 +41,9 @@ include '../../core/init.php';
             <?php 
                 if(isset($_POST["add_custom_status"])){
                     $data = array(
-                        "status_name" => $_POST["status_name"],
-                        "bg_color" => $_POST["status_bgcolor"],
-                        "text_color" => $_POST["status_fontcolor"],
+                        "status_name" => mysqli_real_escape_string($con,$_POST["status_name"]),
+                        "bg_color" => mysqli_real_escape_string($con,$_POST["status_bgcolor"]),
+                        "text_color" => mysqli_real_escape_string($con,$_POST["status_fontcolor"]),
                         "visibility_status" => "1"
                     );
                     if($crud->insert_data("status_tbl",$data)){

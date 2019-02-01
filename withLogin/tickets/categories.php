@@ -54,27 +54,31 @@ include '../../core/init.php';
                             	 <table class="table table-striped table-bordered table-hover" id="categories-table" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
-                                    <th>Icon</th>
+                                    <th style="text-align: center;">Icon</th>
                                     <th>Name</th>
-                                    <th>Parent Category</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr>
-                                    <th>Icon</th>
+                                    <th style="text-align: center;"Icon</th>
                                     <th>Name</th>
-                                    <th>Parent Category</th>
                                     <th>Actions</th>
                                 </tr>
                             </tfoot>
                             <tbody>
+                                <?php
+                                    $mysql = $crud->fetch_data("SELECT * FROM categories_tbl");
+                                    foreach ($mysql as $row) {
+                                ?>
                                 <tr>
-                                    <td>Yuri Berry</td>
-                                    <td>Chief Marketing Officer (CMO)</td>
-                                    <td>New York</td>
+                                    <td style="text-align: center;"><?php echo "<img src='../../user/uploaded_images/".$row["category_icon"]."' style='width:80px;height:80px;'>"; ?></td>
+                                    <td><?php echo $row["category_name"]; ?></td>
                                     <td><a data-toggle="tooltip" title="Edit" class="btn btn-info btn-sm text-light"><i class="fa fa-cog"></i></a> | <a data-toggle="tooltip" title="Delete" class="btn btn-danger btn-sm text-light"><i class="fa fa-trash"></i></a></td>
                                 </tr>
+                                <?php
+                                    }
+                                ?>
                             </tbody>
                         	</table>
                             </div>
@@ -153,7 +157,7 @@ include '../../core/init.php';
                             cache:false,
                             processData:false,
                             success:function(data){
-                                btn.html("<i class='fa fa-spinner fa-spin'></i> Loading");
+                                btn.html("<i class='fa fa-spinner fa-spin'></i> Processing");
                                 setTimeout(function(){
                                     btn.html(default_btn);
                                     $("#add_category_modal").modal("hide");

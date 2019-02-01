@@ -47,7 +47,5 @@ class crud{
 		$result = mysqli_query($this->con,$query);
 		return $result;
 	}
-	function upload_file(){
-		
-	}
+
 }

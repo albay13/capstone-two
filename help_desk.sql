@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 31, 2019 at 12:45 AM
+-- Generation Time: Feb 01, 2019 at 12:52 AM
 -- Server version: 10.1.34-MariaDB-0ubuntu0.18.04.1
 -- PHP Version: 7.2.10-0ubuntu0.18.04.1
 
@@ -54,7 +54,6 @@ CREATE TABLE `categories_tbl` (
   `category_name` varchar(100) NOT NULL,
   `category_description` text NOT NULL,
   `category_icon` varchar(100) NOT NULL,
-  `parent_category` varchar(100) NOT NULL,
   `user_group` varchar(100) NOT NULL,
   `category_status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -63,8 +62,8 @@ CREATE TABLE `categories_tbl` (
 -- Dumping data for table `categories_tbl`
 --
 
-INSERT INTO `categories_tbl` (`id`, `category_name`, `category_description`, `category_icon`, `parent_category`, `user_group`, `category_status`) VALUES
-(1, 'Technical Support', '<p>This is for technical support.</p>', '292767721.png', 'none', 'technical', 1);
+INSERT INTO `categories_tbl` (`id`, `category_name`, `category_description`, `category_icon`, `user_group`, `category_status`) VALUES
+(1, 'Technical Support', '<p>This is for technical support.</p>', '292767721.png', 'technical', 1);
 
 -- --------------------------------------------------------
 
@@ -83,7 +82,7 @@ CREATE TABLE `department_tbl` (
 --
 
 INSERT INTO `department_tbl` (`id`, `department`, `department_status`) VALUES
-(1, 'Information Technology', 1),
+(1, 'Operations', 1),
 (2, 'Human Resources', 1),
 (3, 'Admin', 1),
 (4, 'Retail', 1),
@@ -145,21 +144,54 @@ INSERT INTO `status_tbl` (`id`, `status_name`, `bg_color`, `text_color`, `visibi
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `sub_categories_tbl`
+--
+
+CREATE TABLE `sub_categories_tbl` (
+  `id` int(7) NOT NULL,
+  `parent_category_id` int(7) NOT NULL,
+  `sub_category_name` varchar(100) NOT NULL,
+  `description` text NOT NULL,
+  `icon` varchar(255) NOT NULL,
+  `user_group` varchar(100) NOT NULL,
+  `sub_cat_status` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `sub_categories_tbl`
+--
+
+INSERT INTO `sub_categories_tbl` (`id`, `parent_category_id`, `sub_category_name`, `description`, `icon`, `user_group`, `sub_cat_status`) VALUES
+(1, 1, 'Computer', '<p>This is a sub category of Technical Support</p>', '1625265909.png', '1', 1),
+(2, 1, 'Printer', '<p>This is a sub-category of Technical Support</p>', '1576624668.png', '1', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `ticket_info_tbl`
 --
 
 CREATE TABLE `ticket_info_tbl` (
   `id` int(7) NOT NULL,
   `ticket_id` int(7) NOT NULL,
+  `sub_category_id` int(7) NOT NULL,
   `ticket_title` varchar(70) NOT NULL,
   `query` text NOT NULL,
   `ticket_priority` varchar(100) NOT NULL,
   `attachment` text NOT NULL,
-  `action_taken` varchar(100) NOT NULL,
   `ticket_status` varchar(100) NOT NULL,
   `ticket_notes` text NOT NULL,
   `visibility_status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `ticket_info_tbl`
+--
+
+INSERT INTO `ticket_info_tbl` (`id`, `ticket_id`, `sub_category_id`, `ticket_title`, `query`, `ticket_priority`, `attachment`, `ticket_status`, `ticket_notes`, `visibility_status`) VALUES
+(1, 1, 2, 'zxczxcz', '<p>asfsafasf</p>', 'low', '1403040964.png', '1', '<p>fsafasf</p>', 1),
+(2, 1, 2, 'cccc', '<p>zxczxczxc</p>', 'high', '366912717.png', '1', '<p>asfasfasfasfasfas</p>', 1),
+(3, 1, 1, 'xxxx', '<p>asfasasfasf</p>', 'high', '1133603663.png', '3', '<p>asfasfasfasf</p>', 1);
 
 -- --------------------------------------------------------
 
@@ -172,9 +204,17 @@ CREATE TABLE `ticket_tbl` (
   `requester_id` int(7) NOT NULL,
   `department_id` int(7) NOT NULL,
   `ticket_category_id` int(7) NOT NULL,
-  `ticket_info_id` int(7) NOT NULL,
   `visibility_status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `ticket_tbl`
+--
+
+INSERT INTO `ticket_tbl` (`id`, `requester_id`, `department_id`, `ticket_category_id`, `visibility_status`) VALUES
+(1, 1, 6, 1, 1),
+(2, 1, 2, 1, 1),
+(3, 1, 6, 1, 1);
 
 --
 -- Indexes for dumped tables
@@ -209,6 +249,19 @@ ALTER TABLE `personal_info_tbl`
 -- Indexes for table `status_tbl`
 --
 ALTER TABLE `status_tbl`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sub_categories_tbl`
+--
+ALTER TABLE `sub_categories_tbl`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `parent_category_id` (`parent_category_id`);
+
+--
+-- Indexes for table `ticket_info_tbl`
+--
+ALTER TABLE `ticket_info_tbl`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -247,10 +300,20 @@ ALTER TABLE `personal_info_tbl`
 ALTER TABLE `status_tbl`
   MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
+-- AUTO_INCREMENT for table `sub_categories_tbl`
+--
+ALTER TABLE `sub_categories_tbl`
+  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `ticket_info_tbl`
+--
+ALTER TABLE `ticket_info_tbl`
+  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
 -- AUTO_INCREMENT for table `ticket_tbl`
 --
 ALTER TABLE `ticket_tbl`
-  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- Constraints for dumped tables
 --
@@ -260,6 +323,12 @@ ALTER TABLE `ticket_tbl`
 --
 ALTER TABLE `personal_info_tbl`
   ADD CONSTRAINT `personal_info_tbl_ibfk_1` FOREIGN KEY (`login_id`) REFERENCES `accounts_tbl` (`id`);
+
+--
+-- Constraints for table `sub_categories_tbl`
+--
+ALTER TABLE `sub_categories_tbl`
+  ADD CONSTRAINT `sub_categories_tbl_ibfk_1` FOREIGN KEY (`parent_category_id`) REFERENCES `categories_tbl` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
