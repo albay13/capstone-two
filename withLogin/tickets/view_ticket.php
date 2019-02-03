@@ -34,6 +34,8 @@ include '../../core/init.php';
                         <!-- Ticket Content -->
                         <?php
                         $ticket_id = $_GET["ticket_id"];
+                         $get_username = $crud->fetch_data("SELECT user_level,username from accounts_tbl LEFT JOIN ticket_tbl ON accounts_tbl.id = ticket_tbl.requester_id");
+                           $username = mysqli_fetch_array($get_username); 
                         $ticket_query = $crud->fetch_data("SELECT * FROM ticket_info_tbl INNER JOIN ticket_tbl ON ticket_info_tbl.id = ticket_tbl.id WHERE ticket_tbl.id = '$ticket_id'");
                         $ticket_info = mysqli_fetch_array($ticket_query);
                         ?>
@@ -56,6 +58,31 @@ include '../../core/init.php';
                                <div><?php echo $ticket_info["ticket_notes"]; ?></div>
                             </div>
                         </div>
+                        <!-- Replies -->
+                        <?php
+                            $fetch_reply = $crud->fetch_data("SELECT * FROM ticket_reply_tbl");
+                            foreach($fetch_reply as $reply){
+                        ?>
+                        <div class="ibox">
+                            <div class="ibox-head">
+                                <div class="ibox-title"><?php echo "<span style='text-transform:capitalize;'>".$username["user_level"]."</span>"; ?></div>
+                                <div class="ibox-tools">
+                                    <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
+                                    <a class="fullscreen-link"><i class="fa fa-expand"></i></a>
+                                </div>
+                            </div>
+                            <div class="ibox-body">
+                                <?php 
+                                    echo $reply["reply"];
+                                ?>
+                            </div>
+                            <div class="ibox-footer p-2 pl-4">
+                                <small class="text-muted">Posted On : <?php echo $main->date_format($reply["date_reply"]); ?> </small>
+                            </div>
+                        </div>
+                        <?php
+                            }
+                        ?>
                         <!-- Reply to ticket -->
                         <div class="ibox">
                                         <div class="ibox-head">
@@ -66,38 +93,18 @@ include '../../core/init.php';
                                             </div>
                                         </div>
                                         <div class="ibox-body">
-                                          <form>
-                                              <div class="form-group row"> 
-                                                  <div class="col-lg-12">
-                                                      <textarea style="height: 200px;" class="form-control tinymce"></textarea>
-                                                  </div>
-                                              </div>
-                                              <div class="form-group row"> 
-                                                  <div class="col-lg-12">
-                                                      <label class="control-label font-weight-bold">Attach File</label>
-                                                      <input type="file" name="" class="form-control ">
-                                                  </div>
-                                              </div>
-                                              <div class="form-group row"> 
-                                                  <div class="col-lg-12">
-                                                      <label class="control-label font-weight-bold">Default Responses</label>
-                                                      <select class="form-control">
-                                                          <option>zxczxc</option>
-                                                          <option>xcxc</option>
-                                                      </select>
-                                                  </div>
-                                              </div>
-                                              <div class="form-group row">
-                                                  <div class="col-lg-12">
-                                                      <button class="btn btn-primary form-control">Reply</button>
-                                                  </div>
-                                              </div>
-                                          </form> 
+                                            <?php include '../../includes/reply_ticket.form.php'; ?>
                                         </div>
                                     </div>
                 </div>
                 <div class="col-lg-4">
-                        <!-- Ticket Details -->    
+                        <!-- Ticket Details -->
+                        <?php
+                           $category = $crud->fetch_data("SELECT category_name from categories_tbl where id = '".$ticket_info["ticket_category_id"]."'");
+                           $ctgry = mysqli_fetch_array($category);
+                           $ticket_details = $crud->fetch_data("SELECT personal_info_tbl.email,personal_info_tbl.first_name,personal_info_tbl.last_name FROM personal_info_tbl LEFT JOIN ticket_tbl ON ticket_tbl.requester_id = personal_info_tbl.login_id WHERE ticket_tbl.id = '$ticket_id' "); 
+                           $row_ticket_dtls = mysqli_fetch_array($ticket_details);
+                        ?>    
                         <div class="ibox">
                             <div class="ibox-head">
                                 <div class="ibox-title">Ticket Details</div>
@@ -111,27 +118,29 @@ include '../../core/init.php';
                                    <tbody>
                                        <tr>
                                            <td style="text-align: right; width: 50%;">#</td>
-                                           <td style="width: 50%;">#</td>
+                                           <td style="width: 50%;"><?php echo $_GET["ticket_id"]; ?></td>
                                        </tr>
                                        <tr>
                                            <td style="text-align: right; width: 50%;">Username</td>
-                                           <td style="width: 50%;">#</td>
+                                           <td style="width: 50%;"><?php echo $username["username"]; ?></td>
                                        </tr>
                                        <tr>
                                            <td style="text-align: right; width: 50%;">Email</td>
-                                           <td style="width: 50%;">#</td>
+                                           <td style="width: 50%;"><?php echo $row_ticket_dtls["email"]; ?></td>
                                        </tr>
                                        <tr>
                                            <td style="text-align: right; width: 50%;">Name</td>
-                                           <td style="width: 50%;">#</td>
+                                           <td style="width: 50%;"><?php echo $row_ticket_dtls["first_name"]." ".$row_ticket_dtls["last_name"]; ?></td>
                                        </tr>
                                        <tr>
                                            <td style="text-align: right; width: 50%;">Created</td>
-                                           <td>#</td>
+                                           <td><?php 
+                                            echo $main->date_format($ticket_info["date_created"]);
+                                            ?></td>
                                        </tr>
                                        <tr>
                                            <td style="text-align: right;">Category</td>
-                                           <td>#</td>
+                                           <td><?php echo $ctgry["category_name"]; ?></td>
                                        </tr>
                                    </tbody>
                                </table>
@@ -142,14 +151,12 @@ include '../../core/init.php';
                                   <div class=" row">
                                     <div class="btn-group mr-1">
                                       <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Action
+                                        Actions
                                       </button>
                                       <div class="dropdown-menu">
                                         <a class="dropdown-item" href="#">New</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <a class="dropdown-item" href="#">Cose action</a>
                                         <a class="dropdown-item" href="#">Something else here</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">Separated link</a>
                                       </div>
                                     </div>
                                   <a class="btn btn-danger btn-sm text-light"><i class="fa fa-trash"></i></a>
@@ -193,4 +200,27 @@ include '../../core/init.php';
     <script src="<?php echo base_url.'assets/js/tinymce/tinymce.min.js';?>"></script>
     <script src="<?php echo base_url.'assets/js/tinymce/tinymce.js';?>"></script>
     <script src="<?php echo base_url.'assets/js/tinymce/init-tinymce.js'; ?>"></script>
+    <script>
+        $(document).ready(function(){
+            $("#reply_ticket_form").on('submit',function(e){
+                    e.preventDefault();
+                    if($("#reply").val() == "" || $("#attachment").val() == ""){
+                        return false;
+                    }else{
+                        $.ajax({
+                            url: "../../core/ajax/reply_ticket.php",
+                            method:"POST",
+                            data:new FormData(this),
+                            contentType:false,
+                            processData:false,
+                            cache:false,
+                            success:function(data){
+                                alert(data);
+                            }
+                        });
+
+                    }
+            });
+        });
+    </script>
 </html>
