@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 01, 2019 at 04:36 PM
+-- Generation Time: Feb 03, 2019 at 04:25 PM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 7.0.8
 
@@ -196,6 +196,7 @@ CREATE TABLE `ticket_info_tbl` (
   `attachment` text NOT NULL,
   `ticket_status` varchar(100) NOT NULL,
   `ticket_notes` text NOT NULL,
+  `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `visibility_status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -203,10 +204,10 @@ CREATE TABLE `ticket_info_tbl` (
 -- Dumping data for table `ticket_info_tbl`
 --
 
-INSERT INTO `ticket_info_tbl` (`id`, `ticket_id`, `sub_category_id`, `ticket_title`, `query`, `ticket_priority`, `attachment`, `ticket_status`, `ticket_notes`, `visibility_status`) VALUES
-(1, 1, 2, 'zxczxcz', '<p>asfsafasf</p>', 'low', '1403040964.png', '1', '<p>fsafasf</p>', 1),
-(2, 1, 2, 'cccc', '<p>zxczxczxc</p>', 'high', '366912717.png', '1', '<p>asfasfasfasfasfas</p>', 1),
-(3, 1, 1, 'xxxx', '<p>asfasasfasf</p>', 'high', '1133603663.png', '3', '<p>asfasfasfasf</p>', 1);
+INSERT INTO `ticket_info_tbl` (`id`, `ticket_id`, `sub_category_id`, `ticket_title`, `query`, `ticket_priority`, `attachment`, `ticket_status`, `ticket_notes`, `date_created`, `visibility_status`) VALUES
+(1, 1, 2, 'zxczxcz', '<p>asfsafasf</p>', 'low', '1403040964.png', '1', '<p>fsafasf</p>', '2019-02-02 14:29:08', 1),
+(2, 1, 2, 'cccc', '<p>zxczxczxc</p>', 'high', '366912717.png', '1', '<p>asfasfasfasfasfas</p>', '2019-02-02 14:29:08', 1),
+(3, 1, 1, 'xxxx', '<p>asfasasfasf</p>', 'high', '1133603663.png', '3', '<p>asfasfasfasf</p>', '2019-02-02 14:29:08', 1);
 
 -- --------------------------------------------------------
 
@@ -217,12 +218,19 @@ INSERT INTO `ticket_info_tbl` (`id`, `ticket_id`, `sub_category_id`, `ticket_tit
 CREATE TABLE `ticket_reply_tbl` (
   `id` int(7) NOT NULL,
   `ticket_id` int(7) NOT NULL,
-  `assisting _personnel_id` int(7) NOT NULL,
+  `assisting_personnel_id` int(7) NOT NULL,
   `reply` text NOT NULL,
   `uploaded_file` text NOT NULL,
   `date_reply` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `reply_status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ticket_reply_tbl`
+--
+
+INSERT INTO `ticket_reply_tbl` (`id`, `ticket_id`, `assisting_personnel_id`, `reply`, `uploaded_file`, `date_reply`, `reply_status`) VALUES
+(1, 2, 1, '<p>zzzz</p>', '20170.xlsx', '2019-02-03 15:10:47', 1);
 
 -- --------------------------------------------------------
 
@@ -361,7 +369,7 @@ ALTER TABLE `ticket_info_tbl`
 -- AUTO_INCREMENT for table `ticket_reply_tbl`
 --
 ALTER TABLE `ticket_reply_tbl`
-  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `ticket_tbl`
 --
