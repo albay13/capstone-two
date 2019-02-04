@@ -9,7 +9,7 @@
                 </div>
                 <ul class="side-menu metismenu">
                     <li>
-                        <a href="index.php"><i class="sidebar-item-icon fa fa-th-large"></i>
+                        <a href="<?php echo base_url.'index.php'; ?>"><i class="sidebar-item-icon fa fa-th-large"></i>
                             <span class="nav-label">Dashboard</span>
                         </a>
                     </li>
@@ -31,7 +31,7 @@
                                 <a href="<?php echo base_url.'withLogin/tickets/status.php'; ?>">Custom Status</a>
                             </li>
                             <li>
-                                <a href="tabs.html">Custom Views</a>
+                                <a href="<?php echo base_url.'withLogin/tickets/custom_views.php'; ?>">Custom Views</a>
                             </li>
                         </ul>
                     </li>
@@ -40,10 +40,10 @@
                             <span class="nav-label">Knowledge Base</span><i class="fa fa-angle-left arrow"></i></a>
                         <ul class="nav-2-level collapse">
                             <li>
-                                <a href="form_basic.html">Articles</a>
+                                <a href="<?php echo base_url.'withLogin/knowledge_base/articles.php'; ?>">Articles</a>
                             </li>
                             <li>
-                                <a href="form_advanced.html">Categories</a>
+                                <a href="<?php echo base_url.'withLogin/knowledge_base/article_categories.php'; ?>">Categories</a>
                             </li>
                         </ul>
                     </li>
@@ -52,10 +52,7 @@
                             <span class="nav-label">FAQs</span><i class="fa fa-angle-left arrow"></i></a>
                         <ul class="nav-2-level collapse">
                             <li>
-                                <a href="table_basic.html">FAQ</a>
-                            </li>
-                            <li>
-                                <a href="datatables.html">Categories</a>
+                                <a href="<?php echo base_url.'withLogin/faqs/FAQs.php'; ?>">Questions</a>
                             </li>
                         </ul>
                     </li>

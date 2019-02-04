@@ -1,4 +1,4 @@
-<form id="add_category_form" name="add_category_form" method="post" enctype="multipart/form-data"> 
+<form id="add_article_category_form" name="add_article_category_form" method="post" enctype="multipart/form-data"> 
 <div class="modal-body">
 <div class="form-group row">
     <label class="control-label col-lg-3">Category Name </label>
@@ -24,7 +24,7 @@
         <select class="form-control" id="parent_category" name="parent_category" required>
             <option value="0">None</option>
             <?php
-                $parent = $crud->fetch_data("SELECT * FROM categories_tbl");
+                $parent = $crud->fetch_data("SELECT * FROM article_categories_tbl");
                 foreach($parent as $row_parent){
             ?>
                 <option value="<?php echo $row_parent["id"]; ?>"><?php echo $row_parent["category_name"]; ?></option>
@@ -45,7 +45,7 @@
     </div>
 </div>
 <div class="form-group row">
-    <label class="control-label col-lg-3">User Group</label>
+    <label class="control-label col-lg-3">Restricted Group</label>
     <div class="col-lg-9">
         
         <select class="form-control multiple_select" id="user_group" name="user_group[]" style="width: 100%;" multiple="" required>
@@ -60,7 +60,7 @@
         </select>
         <div class="form-input">
         </div>
-        <small>If you assign a user group to this category, only users in that user group will be able to access tickets in this category.</small>
+        <small>Only users in the groups listed above can view articles in this category.</small>
     </div>
 </div>
 <div class="modal-footer">

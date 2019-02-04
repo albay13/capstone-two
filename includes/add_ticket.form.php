@@ -70,7 +70,9 @@
     <div id="sub-category" class="form-group row">
         <label class="control-label col-lg-3"></label>
         <div class="col-lg-9">
-            <div id="select-sub-category"></div>  
+            <div id="select-sub-category">
+              <select name='sub_category' id='sub_category'><option value='0' selected></option></select>
+            </div>  
         </div>
     </div>
 

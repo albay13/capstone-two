@@ -108,6 +108,7 @@ include '../../core/init.php';
                             function(data){
                                 if(data == 'false'){
                                     $("#sub-category").hide();
+                                    $("#select-sub-category").html("<select name='sub_category' id='sub_category'><option value='0' selected></option></select>");
                                 }else{
                                     $("#sub-category").show();
                                     $("#select-sub-category").html(data);
@@ -133,7 +134,9 @@ include '../../core/init.php';
                                     btn.html("<i class='fa fa-spinner fa-spin'></i> Processing");
                                     setTimeout(function(){
                                         btn.html(default_btn);
-                                        swal("Success",data,'success');
+                                        swal({title:"Success",text:data,type:'success'}).then(function(){
+                                            location.reload();
+                                        });
                                     },2000);
                                     }
                             });

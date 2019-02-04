@@ -18,7 +18,11 @@ if(isset($_FILES["category_icon"]["name"]) && $_FILES["category_icon"]["name"] !
 							"user_group"           => mysqli_real_escape_string($con,$ug),
 							"category_status"      => "1"
 							);
-						$crud->insert_data("categories_tbl",$data);		
+						if($crud->insert_data("article_categories_tbl",$data)){
+							echo 'Custom category was added';
+						}else{
+							echo 'Custom category was not added.';
+						}		
 					}
 			}else{
 				foreach ($user_group as $ug) {
@@ -30,10 +34,14 @@ if(isset($_FILES["category_icon"]["name"]) && $_FILES["category_icon"]["name"] !
 						"user_group"         => mysqli_real_escape_string($con,$ug),
 						"sub_cat_status"     => "1"
 					);
-					$crud->insert_data("sub_categories_tbl",$data);	
+					if($crud->insert_data("article_sub_categories_tbl",$data)){
+						echo 'Custom category was added';
+					}else{
+						echo 'Custom category was not added.';
+					}	
 				}
 			}
-			echo 'Custom status was added';
+			
 		}else{
 			echo "There are some error";
 			return false;

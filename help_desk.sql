@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 4.6.6deb5
+-- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Feb 03, 2019 at 04:25 PM
--- Server version: 10.1.13-MariaDB
--- PHP Version: 7.0.8
+-- Host: localhost:3306
+-- Generation Time: Feb 04, 2019 at 12:56 AM
+-- Server version: 10.1.34-MariaDB-0ubuntu0.18.04.1
+-- PHP Version: 7.2.10-0ubuntu0.18.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -46,6 +46,83 @@ INSERT INTO `accounts_tbl` (`id`, `username`, `password`, `user_level`, `account
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `articles_tbl`
+--
+
+CREATE TABLE `articles_tbl` (
+  `id` int(7) NOT NULL,
+  `article_title` varchar(100) NOT NULL,
+  `article_content` text NOT NULL,
+  `article_category` varchar(100) NOT NULL,
+  `article_sub_category` varchar(100) NOT NULL,
+  `user_id` int(7) NOT NULL,
+  `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `article_status` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `articles_tbl`
+--
+
+INSERT INTO `articles_tbl` (`id`, `article_title`, `article_content`, `article_category`, `article_sub_category`, `user_id`, `date_created`, `article_status`) VALUES
+(1, 'ccc', '<p>zxczxc</p>', '1', '', 1, '2019-02-04 06:24:10', 1),
+(2, 'zxczxc', '<p>zxczxc</p>', '2', '0', 1, '2019-02-04 06:24:10', 1),
+(3, 'zxczxc', '<p>zxczxczxc</p>', '1', '0', 1, '2019-02-04 06:24:10', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `article_categories_tbl`
+--
+
+CREATE TABLE `article_categories_tbl` (
+  `id` int(7) NOT NULL,
+  `category_name` varchar(100) NOT NULL,
+  `category_description` text NOT NULL,
+  `category_icon` varchar(100) NOT NULL,
+  `user_group` varchar(100) NOT NULL,
+  `category_status` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `article_categories_tbl`
+--
+
+INSERT INTO `article_categories_tbl` (`id`, `category_name`, `category_description`, `category_icon`, `user_group`, `category_status`) VALUES
+(1, 'Tutorial', '<p>zxczxc</p>', '1849164580.png', '', 1),
+(2, 'zxczxc', '<p>zxczxczxc</p>', '699819354.png', '', 1),
+(3, 'zxczxc', '<p>zxczxczzxc</p>', '427791677.png', '3', 1),
+(4, 'ccc', '<p>ccc</p>', '433084486.png', '4', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `article_sub_categories_tbl`
+--
+
+CREATE TABLE `article_sub_categories_tbl` (
+  `id` int(7) NOT NULL,
+  `parent_category_id` int(7) NOT NULL,
+  `sub_category_name` varchar(100) NOT NULL,
+  `description` text NOT NULL,
+  `icon` varchar(255) NOT NULL,
+  `user_group` varchar(100) NOT NULL,
+  `sub_cat_status` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `article_sub_categories_tbl`
+--
+
+INSERT INTO `article_sub_categories_tbl` (`id`, `parent_category_id`, `sub_category_name`, `description`, `icon`, `user_group`, `sub_cat_status`) VALUES
+(1, 1, 'zxczxc', '<p>zxczxczxc</p>', '514808893.png', '1', 1),
+(2, 1, 'zxczxc', '<p>zxczxczxc</p>', '575629754.png', '1', 1),
+(3, 1, 'zxczxc', '<p>zxczxczxc</p>', '1863336285.png', '1', 1),
+(4, 4, 'zxc', '<p>zxczxc</p>', '603329927.png', '1', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `categories_tbl`
 --
 
@@ -63,7 +140,28 @@ CREATE TABLE `categories_tbl` (
 --
 
 INSERT INTO `categories_tbl` (`id`, `category_name`, `category_description`, `category_icon`, `user_group`, `category_status`) VALUES
-(1, 'Technical Support', '<p>This is for technical support.</p>', '292767721.png', 'technical', 1);
+(1, 'Technical Support', '<p>This is for technical support.</p>', '292767721.png', 'technical', 1),
+(2, 'zz', '<p>zzz</p>', '839691243.png', '', 1),
+(3, 'zzz', '<p>zzz</p>', '1081619060.png', '', 1),
+(4, 'zxczxc', '<p>zxczxc</p>', '236835405.png', '3', 1),
+(5, 'zxc', '<p>zxczxc</p>', '1153085307.png', '1', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `custom_views_tbl`
+--
+
+CREATE TABLE `custom_views_tbl` (
+  `id` int(7) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `status` varchar(100) NOT NULL,
+  `category` varchar(100) NOT NULL,
+  `order_by` varchar(100) NOT NULL,
+  `sort_by` varchar(100) NOT NULL,
+  `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `view_status` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -90,6 +188,30 @@ INSERT INTO `department_tbl` (`id`, `department`, `department_status`) VALUES
 (6, 'Accounting', 1),
 (7, 'Permits', 1),
 (8, 'Engineering', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `faqs_tbl`
+--
+
+CREATE TABLE `faqs_tbl` (
+  `id` int(7) NOT NULL,
+  `questions` varchar(100) NOT NULL,
+  `content` text NOT NULL,
+  `user_id` int(7) NOT NULL,
+  `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `question_status` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `faqs_tbl`
+--
+
+INSERT INTO `faqs_tbl` (`id`, `questions`, `content`, `user_id`, `date_created`, `question_status`) VALUES
+(1, 'zxczxc', 'ccc', 1, '2019-02-04 06:48:35', 1),
+(2, 'zxc', '<p>zxczxc</p>', 1, '2019-02-04 06:51:49', 1),
+(3, 'vvv', '<p>vvvvv</p>', 1, '2019-02-04 06:51:59', 1);
 
 -- --------------------------------------------------------
 
@@ -163,7 +285,12 @@ CREATE TABLE `sub_categories_tbl` (
 
 INSERT INTO `sub_categories_tbl` (`id`, `parent_category_id`, `sub_category_name`, `description`, `icon`, `user_group`, `sub_cat_status`) VALUES
 (1, 1, 'Computer', '<p>This is a sub category of Technical Support</p>', '1625265909.png', '1', 1),
-(2, 1, 'Printer', '<p>This is a sub-category of Technical Support</p>', '1576624668.png', '1', 1);
+(2, 1, 'Printer', '<p>This is a sub-category of Technical Support</p>', '1576624668.png', '1', 1),
+(3, 2, 'zz', '<p>zzz</p>', '1403567498.png', '4', 1),
+(4, 2, 'zxczxc', '<p>zxczxc</p>', '1394021030.png', '1', 1),
+(5, 2, 'zxczxc', '<p>zxczxc</p>', '1394021030.png', '3', 1),
+(6, 2, 'zxczxc', '<p>zxczxc</p>', '1394021030.png', '4', 1),
+(7, 1, 'zzz', '<p>zzz</p>', '940035197.png', '4', 1);
 
 -- --------------------------------------------------------
 
@@ -205,9 +332,7 @@ CREATE TABLE `ticket_info_tbl` (
 --
 
 INSERT INTO `ticket_info_tbl` (`id`, `ticket_id`, `sub_category_id`, `ticket_title`, `query`, `ticket_priority`, `attachment`, `ticket_status`, `ticket_notes`, `date_created`, `visibility_status`) VALUES
-(1, 1, 2, 'zxczxcz', '<p>asfsafasf</p>', 'low', '1403040964.png', '1', '<p>fsafasf</p>', '2019-02-02 14:29:08', 1),
-(2, 1, 2, 'cccc', '<p>zxczxczxc</p>', 'high', '366912717.png', '1', '<p>asfasfasfasfasfas</p>', '2019-02-02 14:29:08', 1),
-(3, 1, 1, 'xxxx', '<p>asfasasfasf</p>', 'high', '1133603663.png', '3', '<p>asfasfasfasf</p>', '2019-02-02 14:29:08', 1);
+(1, 1, 1, 'My PC is not working!', '<h1><em><strong>This is a sample data</strong></em></h1>', 'high', '504607165.png', '1', '<p>This is an added note.</p>', '2019-02-04 07:09:56', 1);
 
 -- --------------------------------------------------------
 
@@ -224,13 +349,6 @@ CREATE TABLE `ticket_reply_tbl` (
   `date_reply` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `reply_status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `ticket_reply_tbl`
---
-
-INSERT INTO `ticket_reply_tbl` (`id`, `ticket_id`, `assisting_personnel_id`, `reply`, `uploaded_file`, `date_reply`, `reply_status`) VALUES
-(1, 2, 1, '<p>zzzz</p>', '20170.xlsx', '2019-02-03 15:10:47', 1);
 
 -- --------------------------------------------------------
 
@@ -251,9 +369,7 @@ CREATE TABLE `ticket_tbl` (
 --
 
 INSERT INTO `ticket_tbl` (`id`, `requester_id`, `department_id`, `ticket_category_id`, `visibility_status`) VALUES
-(1, 1, 6, 1, 1),
-(2, 1, 2, 1, 1),
-(3, 1, 6, 1, 1);
+(1, 1, 2, 1, 1);
 
 --
 -- Indexes for dumped tables
@@ -266,15 +382,45 @@ ALTER TABLE `accounts_tbl`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `articles_tbl`
+--
+ALTER TABLE `articles_tbl`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `article_categories_tbl`
+--
+ALTER TABLE `article_categories_tbl`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `article_sub_categories_tbl`
+--
+ALTER TABLE `article_sub_categories_tbl`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `categories_tbl`
 --
 ALTER TABLE `categories_tbl`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `custom_views_tbl`
+--
+ALTER TABLE `custom_views_tbl`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `department_tbl`
 --
 ALTER TABLE `department_tbl`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `faqs_tbl`
+--
+ALTER TABLE `faqs_tbl`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -331,15 +477,40 @@ ALTER TABLE `ticket_tbl`
 ALTER TABLE `accounts_tbl`
   MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
+-- AUTO_INCREMENT for table `articles_tbl`
+--
+ALTER TABLE `articles_tbl`
+  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `article_categories_tbl`
+--
+ALTER TABLE `article_categories_tbl`
+  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `article_sub_categories_tbl`
+--
+ALTER TABLE `article_sub_categories_tbl`
+  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
 -- AUTO_INCREMENT for table `categories_tbl`
 --
 ALTER TABLE `categories_tbl`
-  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `custom_views_tbl`
+--
+ALTER TABLE `custom_views_tbl`
+  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `department_tbl`
 --
 ALTER TABLE `department_tbl`
   MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT for table `faqs_tbl`
+--
+ALTER TABLE `faqs_tbl`
+  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `personal_info_tbl`
 --
@@ -354,7 +525,7 @@ ALTER TABLE `status_tbl`
 -- AUTO_INCREMENT for table `sub_categories_tbl`
 --
 ALTER TABLE `sub_categories_tbl`
-  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `ticket_history_tbl`
 --
@@ -364,17 +535,17 @@ ALTER TABLE `ticket_history_tbl`
 -- AUTO_INCREMENT for table `ticket_info_tbl`
 --
 ALTER TABLE `ticket_info_tbl`
-  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `ticket_reply_tbl`
 --
 ALTER TABLE `ticket_reply_tbl`
-  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `ticket_tbl`
 --
 ALTER TABLE `ticket_tbl`
-  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- Constraints for dumped tables
 --

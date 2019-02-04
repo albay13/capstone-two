@@ -47,5 +47,9 @@ class crud{
 		$result = mysqli_query($this->con,$query);
 		return $result;
 	}
+	function update_data($query){
+		$result = mysqli_query($this->con,$query);
+		return $result;
+	}
 
 }
