@@ -43,6 +43,11 @@ class crud{
 			return false;
 		}
 	}
+	function count_rows($query){
+		$result = mysqli_query($this->con,$query);
+		$count_rows = $result->num_rows;
+		return $count_rows;
+	}
 	function fetch_data($query){
 		$result = mysqli_query($this->con,$query);
 		return $result;
@@ -51,5 +56,15 @@ class crud{
 		$result = mysqli_query($this->con,$query);
 		return $result;
 	}
+	function custom_view(){
+            $output = '';
+            $output .= "<div class='dropdown'><button type='button' class='btn btn-primary dropdown-toggle btn-sm ml-2' data-toggle='dropdown'>Custom views <span class='caret'></button><div class='dropdown-menu dm_custom_view'>";
+            $custom_view = $this->fetch_data("SELECT * FROM custom_views_tbl");
+            foreach($custom_view as $row){
+            $output .= "<a class='dropdown-item filter-table' data-id='".$row["id"]."' >".$row["name"]."</a>"; 
+            }       
+            $output.="</div></div>";
+            echo $output;
+    }
 
 }

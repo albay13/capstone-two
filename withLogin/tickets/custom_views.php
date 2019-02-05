@@ -115,6 +115,9 @@ include '../../core/init.php';
     <script src="<?php echo base_url.'assets/js/jquery-slimscroll/jquery.slimscroll.min.js'?>" type="text/javascript"></script>
      <script src="<?php echo base_url.'assets/DataTables/datatables.min.js';?>" type="text/javascript"></script>
     <script src="<?php echo base_url.'assets/js/app.min.js'; ?>" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/jquery.validate.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="<?php echo base_url.'assets/js/script.js'; ?>"></script>
      <script type="text/javascript">
         $(function() {
@@ -128,7 +131,17 @@ include '../../core/init.php';
             });
             $("#add_custom_views_form").on('submit',function(e){
                     e.preventDefault();
-                    if($("#"))
+                    if($("#query_name").val() == '' || $("#status").val() == '' || $("#category").val() == '' || $("#order_by").val() == '' || $("#sort_by").val() == ''){
+                        return false;
+                    }else{
+                        $.post(
+                            "<?php echo base_url.'core/ajax/insert_custom_views.php'; ?>",
+                            $(this).serialize(),
+                            function(data){
+                                alert(data);
+                            }
+                        );
+                    }
             });
         })  
     </script>

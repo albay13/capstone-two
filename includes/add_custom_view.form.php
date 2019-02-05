@@ -13,7 +13,7 @@
     <div class="col-lg-9">
         <div class="form-input">
         <select id="status" name="status" class="form-control">
-            <option value="default">All</option>
+            <option value="All">All</option>
         <?php 
             $select_status = $crud->fetch_data("SELECT * FROM status_tbl");
             foreach($select_status as $status){
@@ -31,7 +31,7 @@
     <div class="col-lg-9">
         <div class="form-input">
         <select id="category" name="category" class="form-control">
-            <option value="default">All</option>
+            <option value="All">All</option>
         <?php 
             $select_category = $crud->fetch_data("SELECT * FROM categories_tbl");
             foreach($select_category as $category){
