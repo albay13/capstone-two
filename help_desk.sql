@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 04, 2019 at 08:32 PM
+-- Generation Time: Feb 06, 2019 at 01:58 AM
 -- Server version: 10.1.34-MariaDB-0ubuntu0.18.04.1
 -- PHP Version: 7.2.10-0ubuntu0.18.04.1
 
@@ -140,11 +140,10 @@ CREATE TABLE `categories_tbl` (
 --
 
 INSERT INTO `categories_tbl` (`id`, `category_name`, `category_description`, `category_icon`, `user_group`, `category_status`) VALUES
-(1, 'Technical Support', '<p>This is for technical support.</p>', '292767721.png', 'technical', 1),
-(2, 'zz', '<p>zzz</p>', '839691243.png', '', 1),
-(3, 'zzz', '<p>zzz</p>', '1081619060.png', '', 1),
-(4, 'zxczxc', '<p>zxczxc</p>', '236835405.png', '3', 1),
-(5, 'zxc', '<p>zxczxc</p>', '1153085307.png', '1', 1);
+(1, 'Technical Support', '<p>This is for technical support.</p>', '292767721.png', '1', 1),
+(2, 'zz', '<p>zzz</p>', '839691243.png', '2', 0),
+(3, 'zzz', '<p>zzz</p>', '1081619060.png', '2', 0),
+(4, 'zxczxc', '<p>zxczxc</p>', '236835405.png', '3', 0);
 
 -- --------------------------------------------------------
 
@@ -168,8 +167,9 @@ CREATE TABLE `custom_views_tbl` (
 --
 
 INSERT INTO `custom_views_tbl` (`id`, `name`, `status`, `category`, `order_by`, `sort_by`, `date_created`, `view_status`) VALUES
-(1, 'Hello World!', 'All', 'All', 'ticket_title', 'ASC', '2019-02-05 00:25:32', 1),
-(2, 'Filter A', '1', '2', 'date_created', 'DESC', '2019-02-05 01:19:12', 1);
+(1, 'Hello World!', 'All', 'All', 'ticket_title', 'ASC', '2019-02-06 09:45:05', 1),
+(2, 'Filter A', '1', '2', 'date_created', 'DESC', '2019-02-06 09:45:14', 1),
+(3, 'Select New Status', '1', 'All', 'date_created', 'ASC', '2019-02-06 09:45:08', 1);
 
 -- --------------------------------------------------------
 
@@ -343,7 +343,10 @@ CREATE TABLE `ticket_info_tbl` (
 INSERT INTO `ticket_info_tbl` (`id`, `ticket_id`, `sub_category_id`, `ticket_title`, `query`, `ticket_priority`, `attachment`, `ticket_status`, `ticket_notes`, `date_created`, `visibility_status`) VALUES
 (1, 1, 1, 'My PC is not working!', '<h1><em><strong>This is a sample data</strong></em></h1>', 'high', '504607165.png', '3', '<p>This is an added note.</p>', '2019-02-04 07:09:56', 1),
 (2, 2, 2, 'cxvvxcv', '<p>czxczxc</p>', 'medium', '812743510.png', '1', '<p>zxczxczxc</p>', '2019-02-05 04:21:42', 1),
-(3, 3, 2, 'cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc', '<p>asfasfasfasfasf</p>', 'high', '771630880.png', '4', '<p>asfsaf</p>', '2019-02-05 04:30:44', 1);
+(3, 3, 2, 'cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc', '<p>asfasfasfasfasf</p>', 'high', '771630880.png', '3', '<p>asfsaf</p>', '2019-02-05 04:30:44', 1),
+(4, 4, 1, 'ccc', '<p>zxczxczxc</p>', 'low', '1458482123.png', '1', '<p>zxczxczxc</p>', '2019-02-06 02:46:08', 1),
+(5, 5, 6, 'zzz', '<p>zxczxc</p>', 'high', '862765936.png', '1', '<p>zxczxczxc</p>', '2019-02-06 02:47:57', 1),
+(6, 6, 1, 'cccc', '<p>zxczxczxcz</p>', 'low', '362158361.png', '1', '<p>zxczxczxc</p>', '2019-02-06 09:46:21', 1);
 
 -- --------------------------------------------------------
 
@@ -360,6 +363,14 @@ CREATE TABLE `ticket_reply_tbl` (
   `date_reply` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `reply_status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ticket_reply_tbl`
+--
+
+INSERT INTO `ticket_reply_tbl` (`id`, `ticket_id`, `assisting_personnel_id`, `reply`, `uploaded_file`, `date_reply`, `reply_status`) VALUES
+(1, 5, 1, '<p>ccc</p>', '1491212098.png', '2019-02-06 02:50:18', 1),
+(2, 1, 1, '<p>zxczxczxc</p>', '586692393.png', '2019-02-06 09:46:47', 1);
 
 -- --------------------------------------------------------
 
@@ -382,7 +393,10 @@ CREATE TABLE `ticket_tbl` (
 INSERT INTO `ticket_tbl` (`id`, `requester_id`, `department_id`, `ticket_category_id`, `visibility_status`) VALUES
 (1, 1, 2, 1, 1),
 (2, 1, 6, 1, 1),
-(3, 1, 6, 1, 1);
+(3, 1, 6, 1, 1),
+(4, 1, 6, 1, 1),
+(5, 1, 6, 2, 1),
+(6, 1, 6, 1, 1);
 
 --
 -- Indexes for dumped tables
@@ -513,7 +527,7 @@ ALTER TABLE `categories_tbl`
 -- AUTO_INCREMENT for table `custom_views_tbl`
 --
 ALTER TABLE `custom_views_tbl`
-  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `department_tbl`
 --
@@ -548,17 +562,17 @@ ALTER TABLE `ticket_history_tbl`
 -- AUTO_INCREMENT for table `ticket_info_tbl`
 --
 ALTER TABLE `ticket_info_tbl`
-  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `ticket_reply_tbl`
 --
 ALTER TABLE `ticket_reply_tbl`
-  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `ticket_tbl`
 --
 ALTER TABLE `ticket_tbl`
-  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- Constraints for dumped tables
 --
