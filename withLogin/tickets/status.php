@@ -82,13 +82,13 @@ include '../../core/init.php';
                             </tfoot>
                             <tbody>
                                <?php 
-                                $mysql = $crud->fetch_data("SELECT * FROM status_tbl");
+                                $mysql = $crud->fetch_data("SELECT * FROM status_tbl WHERE visibility_status = '1'");
                                 foreach ($mysql as $row) {
                                ?>
                                 <tr>
                                     <td style=" width: 40%;"><?php echo $row["status_name"]; ?></td>
                                     <td style="text-align:center; width: 30%; background-color: <?php echo "#".$row["bg_color"]; ?>"><p style="color: <?php echo "#".$row["text_color"]; ?>"><?php echo "#".$row["text_color"]; ?></p></td>
-                                    <td style="text-align: center; width: 30%;"><a  href="edit_custom_status.php?id=<?php echo $row["id"]; ?>" data-toggle="tooltip" title="Edit" data-id="<?php echo $row["id"]; ?>" class="text-light btn btn-primary btn-xs edit"><i class="fa fa-cog"></i></a> | <a  href="" data-toggle="tooltip" title="Delete" data-id="<?php echo $row["id"]; ?>" class="text-light btn btn-danger btn-xs delete"><i class="fa fa-trash"></i></a></td>
+                                    <td style="text-align: center; width: 30%;"><a  href="edit_custom_status.php?id=<?php echo $row["id"]; ?>" data-toggle="tooltip" title="Edit" data-id="<?php echo $row["id"]; ?>" class="text-light btn btn-primary btn-xs edit"><i class="fa fa-cog"></i></a> | <a data-toggle="tooltip" title="Delete" data-id="<?php echo $row["id"]; ?>" class="text-light btn btn-danger btn-xs delete"><i class="fa fa-trash"></i></a></td>
                                 </tr>
                                <?php
                                 }
@@ -131,6 +131,8 @@ include '../../core/init.php';
  	<script src="<?php echo base_url.'assets/js/app.min.js'; ?>" type="text/javascript"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/jquery.validate.js"></script>
     <script src="<?php echo base_url.'assets/js/validations.js'; ?>"></script>
+    <script src="<?php echo base_url.'/assets/sweetDist/sweetalert.min.js';?>"></script>
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url.'assets/sweetDist/sweetalert.css';?>">
  	<script src="<?php echo base_url.'assets/js/script.js'; ?>"></script>
  	<script type="text/javascript">
         $(function() {
@@ -143,8 +145,34 @@ include '../../core/init.php';
             $("#add_status").on('click',function(){
                     $("#add_status_modal").modal("show");
             });
-            $(".delete").on('click',function(){
-                return("Are you sure you want to delete?");
+             $(".delete").on('click',function(){
+                var status_id = $(this).data('id');
+                swal({
+                  title: "Are you sure?",
+                  text: "You will not be able to recover this data",
+                  type: "warning",
+                  showCancelButton: true,
+                  confirmButtonClass: "btn-danger",
+                  confirmButtonText: "Yes, delete it!",
+                  cancelButtonText: "No, cancel plx!",
+                  closeOnConfirm: false,
+                  closeOnCancel: false
+                },
+                function(isConfirm) {
+                  if (isConfirm) {
+                    $.post(
+                        "<?php echo base_url.'core/ajax/delete_data.php'; ?>",
+                        {status_id:status_id},
+                        function(data){
+                            swal({title:"Deleted!",text:"You have successfully deleted a category",type:"success"},function(){
+                                    location.reload();
+                            });
+                        }
+                    );
+                  } else {
+                    swal("Cancelled", "Status was not deleted!", "error");
+                  }
+                });
             });
         });
     </script>

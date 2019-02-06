@@ -69,14 +69,14 @@ include '../../core/init.php';
                             </tfoot>
                             <tbody>
                                 <?php
-                                    $views = $crud->fetch_data("SELECT * FROM custom_views_tbl");
+                                    $views = $crud->fetch_data("SELECT * FROM custom_views_tbl WHERE view_status = '1'");
                                     foreach($views as $rows){
                                 ?>
                                 <tr>
                                     <td><?php echo $rows["name"]; ?></td>
                                     <td><?php echo $rows["status"]; ?></td>
                                     <td><?php echo $rows["category"]; ?></td>
-                                    <td><a href="view_ticket.php?ticket_id=<?php echo $rows["id"]; ?>" data-toggle="tooltip" title="Views" class="btn btn-warning btn-sm text-light"><i class="fa fa-eye"></i></a> | <a href="view_ticket.php?ticket_id=<?php echo $rows["id"]; ?>" data-toggle="tooltip" title="Edit" class="btn btn-info btn-sm text-light"><i class="fa fa-cog"></i></a> | <a href="view_ticket.php?ticket_id=<?php echo $rows["id"]; ?>" data-toggle="tooltip" title="Delete" class="btn btn-danger btn-sm text-light"><i class="fa fa-trash"></i></a></td>
+                                    <td><a href="view_ticket.php?ticket_id=<?php echo $rows["id"]; ?>" data-toggle="tooltip" title="Views" class="btn btn-warning btn-sm text-light"><i class="fa fa-eye"></i></a> | <a href="view_ticket.php?ticket_id=<?php echo $rows["id"]; ?>" data-toggle="tooltip" title="Edit" class="btn btn-info btn-sm text-light"><i class="fa fa-cog"></i></a> | <a data-id="<?php echo $rows["id"]; ?>" data-toggle="tooltip" title="Delete" class="btn btn-danger btn-sm text-light delete"><i class="fa fa-trash"></i></a></td>
                                 </tr>
                                 <?php
                                     }
@@ -117,7 +117,8 @@ include '../../core/init.php';
     <script src="<?php echo base_url.'assets/js/app.min.js'; ?>" type="text/javascript"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/jquery.validate.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="<?php echo base_url.'/assets/sweetDist/sweetalert.min.js';?>"></script>
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url.'assets/sweetDist/sweetalert.css';?>">
     <script src="<?php echo base_url.'assets/js/script.js'; ?>"></script>
      <script type="text/javascript">
         $(function() {
@@ -142,6 +143,35 @@ include '../../core/init.php';
                             }
                         );
                     }
+            });
+             $(".delete").on('click',function(){
+                var view_id = $(this).data('id');
+                swal({
+                  title: "Are you sure?",
+                  text: "You will not be able to recover this data",
+                  type: "warning",
+                  showCancelButton: true,
+                  confirmButtonClass: "btn-danger",
+                  confirmButtonText: "Yes, delete it!",
+                  cancelButtonText: "No, cancel plx!",
+                  closeOnConfirm: false,
+                  closeOnCancel: false
+                },
+                function(isConfirm) {
+                  if (isConfirm) {
+                    $.post(
+                        "<?php echo base_url.'core/ajax/delete_data.php'; ?>",
+                        {view_id:view_id},
+                        function(data){
+                            swal({title:"Deleted!",text:"You have successfully deleted a custom view",type:"success"},function(){
+                                    location.reload();
+                            });
+                        }
+                    );
+                  } else {
+                    swal("Cancelled", "Custom view was not deleted!", "error");
+                  }
+                });
             });
         })  
     </script>

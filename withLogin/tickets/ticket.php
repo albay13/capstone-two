@@ -43,7 +43,7 @@ include '../../core/init.php';
             		<div class="col-lg-12">
                         <div class="ibox">
                             <div class="ibox-head">
-                                <div class="ibox-title">All Tickets</div>
+                                <div class="ibox-title">All Tickets <div class="custom_view"></div></div>
                                 <div class="ibox-tools">
                                     <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
                                     <a class="fullscreen-link"><i class="fa fa-expand"></i></a>
@@ -57,9 +57,7 @@ include '../../core/init.php';
                                     <th>Title</th>
                                     <th style="text-align: center;">Priority</th>
                                     <th style="text-align: center;">Status</th>
-                                    <th>Category</th>
-                                    <th>Last Reply</th>
-                                    <th>Actions</th>
+                                    <th style="text-align: center;">Actions</th>
                                 </tr>
                             </thead>
                             <tfoot>
@@ -67,11 +65,12 @@ include '../../core/init.php';
                                     <th>Title</th>
                                     <th style="text-align: center;">Priority</th>
                                     <th style="text-align: center;">Status</th>
-                                    <th>Category</th>
-                                    <th>Last Reply</th>
-                                    <th>Actions</th>
+                                    <th style="text-align: center;">Actions</th>
                                 </tr>
                             </tfoot>
+                            <tbody>
+                                
+                            </tbody>
                             </table>
                             </div>
                             </div>
@@ -96,33 +95,47 @@ include '../../core/init.php';
  	<script src="<?php echo base_url.'assets/js/script.js'; ?>"></script>
  	 <script type="text/javascript">
         $(function() {
+
             custom_view();
+            added_buttons();
             function custom_view(id = ''){
                 var table = $('#ticket_tbl').DataTable({
-                  "dom": '<"custom_view"><"toolbar">frtip',
+                  rowCallback: function(row, data, index){
+                    $(row).find('td:eq(1)').css({'text-align':'center'});
+                    $.post(
+                        "<?php echo base_url.'core/ajax/fetch_status_property.php'; ?>",
+                        {id:data[2]},
+                        function(data){
+                            var obj = JSON.parse(data);
+                            $(row).find('td:eq(2)').text(obj.status_name);
+                            $(row).find('td:eq(2)').css({'color':"#"+obj.fontcolor,'background-color':"#"+obj.bgcolor,'text-align':'center'});
+                        }
+                    );
+                  },
+                  "dom": '<"toolbar">frtip',
                   "processing" : true,
                   "serverSide" : true,
                   "order" : [],
+                  "searching" : false,
                   "ajax" :{
                     url:"<?php echo base_url.'core/ajax/fetch_custom_views.php'; ?>",
                     method:"POST",
-                    data:{id:id}
-                  }
+                    data:{id:id},
+                   },
                 });
+                 added_buttons();
             }
-           
-            $("div.toolbar")
-                     .html('<a class="btn btn-primary btn-sm ml-2" href="add_ticket.php" id="add_ticket"><i class="fa fa-plus"></i> Add Ticket</a>');
-            $("div.custom_view").html("<?php $crud->custom_view(); ?>");
-            $("#add_status").on('click',function(){
-                    $("#add_category_modal").modal("show");
-            });
-            //Custom View
-            $(".filter-table").on('click',function(){
+          
+           $("div.custom_view").html("<?php $crud->custom_view(); ?>");
+           $(".filter-table").on('click',function(){
                 var id = $(this).data('id');
                 $("#ticket_tbl").DataTable().destroy();
                 custom_view(id);
             });
+            function added_buttons(){
+                $("div.toolbar")
+                     .html('<a class="btn btn-primary btn-sm ml-2" href="add_ticket.php" id="add_ticket"><i class="fa fa-plus"></i> Add Ticket</a>');
+            }  
         })
     </script>
 </html>

@@ -1,3 +1,8 @@
+<?php 
+    $id = $_SESSION["id"];
+    $result = $crud->fetch_data("SELECT * FROM personal_info_tbl INNER JOIN accounts_tbl ON personal_info_tbl.login_id = accounts_tbl.id WHERE accounts_tbl.id='$id'");
+    $rows = mysqli_fetch_array($result);
+?>
 <nav class="page-sidebar" id="sidebar">
             <div id="sidebar-collapse">
                 <div class="admin-block d-flex">
@@ -5,7 +10,7 @@
                         <img src="<?php echo base_url.'assets/images/admin-avatar.png';?>" width="45px" />
                     </div>
                     <div class="admin-info">
-                        <div class="font-strong">James Brown</div><small>Administrator</small></div>
+                        <div class="font-strong"><?php echo $rows["first_name"]. " " .$rows["last_name"]; ?></div><small style="text-transform: capitalize;"><?php echo $rows["user_level"];?></small></div>
                 </div>
                 <ul class="side-menu metismenu">
                     <li>
@@ -24,9 +29,9 @@
                             <li>
                                 <a href="<?php echo base_url.'withLogin/tickets/categories.php'; ?>">Categories</a>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <a href="panels.html">Custom Fields</a>
-                            </li>
+                            </li> -->
                             <li>
                                 <a href="<?php echo base_url.'withLogin/tickets/status.php'; ?>">Custom Status</a>
                             </li>
@@ -56,7 +61,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a href="javascript:;"><i class="sidebar-item-icon fa fa-bar-chart"></i>
                             <span class="nav-label">Reports</span><i class="fa fa-angle-left arrow"></i></a>
                         <ul class="nav-2-level collapse">
@@ -73,7 +78,7 @@
                                 <a href="charts_sparkline.html">Sparkline Charts</a>
                             </li>
                         </ul>
-                    </li>
+                    </li> -->
                     <li class="heading text-uppercase">Access Privileges</li>
                     <li>
                         <a href="javascript:;"><i class="sidebar-item-icon fa fa-users"></i>
@@ -90,7 +95,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li>
+                   <!--  <li>
                         <a href="calendar.html"><i class="sidebar-item-icon fa fa-eye"></i>
                             <span class="nav-label">View Activity log</span>
                         </a>
@@ -145,7 +150,7 @@
                                 </ul>
                             </li>
                         </ul>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </nav>

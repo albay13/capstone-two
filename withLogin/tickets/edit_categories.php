@@ -36,7 +36,7 @@ include '../../core/init.php';
                         <a href="index.html"><i class="fa fa-home font-20"></i> Home</a>
                     </li>
                     <li class="breadcrumb-item">Tickets</li>
-                    <li class="breadcrumb-item"><a href="ticket.php">Categories</a></li>
+                    <li class="breadcrumb-item"><a href="ticket.php">Edit Category</a></li>
                 </ol>
             </div>
              <div class="page-content fade-in-up">
@@ -44,43 +44,16 @@ include '../../core/init.php';
             		<div class="col-lg-12">
                         <div class="ibox">
                             <div class="ibox-head">
-                                <div class="ibox-title">All Categories</div>
+                                <div class="ibox-title">Edit Category</div>
                                 <div class="ibox-tools">
                                     <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
                                     <a class="fullscreen-link"><i class="fa fa-expand"></i></a>
                                 </div>
                             </div>
                             <div class="ibox-body">
-                            	 <table class="table table-striped table-bordered table-hover" id="categories-table" cellspacing="0" width="100%">
-                            <thead>
-                                <tr>
-                                    <th style="text-align: center;">Icon</th>
-                                    <th>Name</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tfoot>
-                                <tr>
-                                    <th style="text-align: center;"Icon</th>
-                                    <th>Name</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </tfoot>
-                            <tbody>
-                                <?php
-                                    $mysql = $crud->fetch_data("SELECT * FROM categories_tbl WHERE category_status = '1'");
-                                    foreach ($mysql as $row) {
-                                ?>
-                                <tr>
-                                    <td style="text-align: center;"><?php echo "<img src='../../user/uploaded_images/".$row["category_icon"]."' style='width:80px;height:80px;'>"; ?></td>
-                                    <td><?php echo $row["category_name"]; ?></td>
-                                    <td><a href="edit_categories.php?id=<?php echo $row["id"]; ?>" data-toggle="tooltip" title="Edit" class="btn btn-info btn-sm text-light"><i class="fa fa-cog"></i></a> | <a data-toggle="tooltip" data-id="<?php echo $row["id"]; ?>" title="Delete" class="btn btn-danger btn-sm text-light delete"><i class="fa fa-trash"></i></a></td>
-                                </tr>
-                                <?php
-                                    }
-                                ?>
-                            </tbody>
-                        	</table>
+                                 <form id="add_category_form" name="add_category_form" method="post" enctype="multipart/form-data"> 
+                            	 <?php include '../../includes/edit_category.form.php'; ?>
+                                 </form>
                             </div>
                         </div>
                     </div>
@@ -91,28 +64,6 @@ include '../../core/init.php';
                 <div class="to-top"><i class="fa fa-angle-double-up"></i></div>
             </footer>
         </div>
-    </div>
-    <!-- Modals -->
-    <div class="modal fade" id="add_category_modal">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-
-          <!-- Modal Header -->
-          <div class="modal-header">
-            <h5 class="modal-title"><i class="fa fa-send"></i> Add Custom Category</h5>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-          </div>
-         <form id="add_category_form" name="add_category_form" method="post" enctype="multipart/form-data"> 
-            <div class="modal-body">
-            <?php include '../../includes/add_category.form.php'; ?>
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-            <button type="submit" name="add_custom_category" id="add_custom_category" class="btn btn-primary">Add Custom Category</button>
-            </div>
-        </form>
-        </div>
-      </div>
     </div>
 </body>
 	<script src="<?php echo base_url.'assets/js/jquery-3.3.1.min.js'?>"></script>
@@ -129,41 +80,11 @@ include '../../core/init.php';
     <script src="<?php echo base_url.'assets/select2/dist/js/select2.full.min.js';?>" type="text/javascript"></script>
     <script src="<?php echo base_url.'assets/js/form-plugins.js';?>" type="text/javascript"></script>
     <script src="<?php echo base_url.'assets/js/validations.js'; ?>"></script>
-    <script src="<?php echo base_url.'/assets/sweetDist/sweetalert.min.js';?>"></script>
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url.'assets/sweetDist/sweetalert.css';?>">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="<?php echo base_url.'assets/js/script.js'; ?>"></script>
  	 <script type="text/javascript">
         $(function() {
             // DataTables Settings
-            $(".delete").on('click',function(){
-                var category_id = $(this).data('id');
-                swal({
-                  title: "Are you sure?",
-                  text: "You will not be able to recover this imaginary file!",
-                  type: "warning",
-                  showCancelButton: true,
-                  confirmButtonClass: "btn-danger",
-                  confirmButtonText: "Yes, delete it!",
-                  cancelButtonText: "No, cancel plx!",
-                  closeOnConfirm: false,
-                  closeOnCancel: false
-                },
-                function(isConfirm) {
-                  if (isConfirm) {
-                    $.post(
-                        "<?php echo base_url.'core/ajax/delete_data.php'; ?>",
-                        {category_id:category_id},
-                        function(data){
-                            swal({title:"Deleted!",text:"You have successfully deleted a category",type:"success"},function(){
-                                    location.reload();
-                            });
-                        }
-                    );
-                  } else {
-                    swal("Cancelled", "Category was not deleted!", "error");
-                  }
-                });
-            });
             var table = $('#categories-table').DataTable({
               "dom": '<"toolbar">frtip',
             });

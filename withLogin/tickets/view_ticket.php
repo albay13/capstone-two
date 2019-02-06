@@ -47,7 +47,7 @@ include '../../core/init.php';
                                     <div style="text-transform: capitalize;" class="ibox-title"><?php echo $ticket_info["ticket_title"]; ?></div>
                                     <div class="ibox-tools">
                                         <?php
-                                        $main->priority_badge($ticket_info["ticket_priority"]);
+                                        $crud->priority_badge($ticket_info["ticket_priority"]);
                                         ?> | 
                                         <span class="badge" style="color:#<?php echo $status["text_color"]; ?>;  background-color: #<?php echo $status["bg_color"]; ?>;"><?php echo $status["status_name"]; ?></span>
                                     </div>

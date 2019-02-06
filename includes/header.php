@@ -1,3 +1,8 @@
+<?php
+$id     = $_SESSION["id"];
+$result = $crud->fetch_data("SELECT * FROM personal_info_tbl INNER JOIN accounts_tbl ON personal_info_tbl.login_id = accounts_tbl.id WHERE accounts_tbl.id='$id'");
+$rows = mysqli_fetch_array($result);
+?>
 <header class="header">
             <div class="page-brand">
                 <a class="link" href="index.html">
@@ -25,7 +30,7 @@
                 <!-- END TOP-LEFT TOOLBAR-->
                 <!-- START TOP-RIGHT TOOLBAR-->
                 <ul class="nav navbar-toolbar">
-                    <li class="dropdown dropdown-inbox">
+                    <!-- <li class="dropdown dropdown-inbox">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope-o"></i>
                             <span class="badge badge-primary envelope-badge">9</span>
                         </a>
@@ -136,11 +141,11 @@
                                 </div>
                             </li>
                         </ul>
-                    </li>
+                    </li> -->
                     <li class="dropdown dropdown-user">
                         <a class="nav-link dropdown-toggle link" data-toggle="dropdown">
                             <img src="<?php echo base_url.'assets/images/admin-avatar.png';?>" />
-                            <span></span>Admin<i class="fa fa-angle-down m-l-5"></i></a>
+                            <span></span><?php echo $rows["first_name"]; ?><i class="fa fa-angle-down m-l-5"></i></a>
                         <ul class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item" href="profile.html"><i class="fa fa-user"></i>Profile</a>
                             <a class="dropdown-item" href="profile.html"><i class="fa fa-cog"></i>Settings</a>
