@@ -17,7 +17,7 @@ header('Location:'.base_url);
         <link rel="stylesheet" type="text/css" href="<?php echo base_url.'assets/css/main.min.css'; ?>">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url.'assets/css/style.css';?>">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url.'assets/font-awesome/css/font-awesome.min.css';?>">
-        <link href="https://fonts.googleapis.com/css?family=Dosis|Merienda+One" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
         <link href="<?php echo base_url.'assets/themify-icons/css/themify-icons.css';?>" rel="stylesheet" />
         <style type="text/css">
         .toolbar{

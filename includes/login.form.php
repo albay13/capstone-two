@@ -15,7 +15,7 @@
 <form method="post" class="text-light" id="login_form">
 <div class="form-group row">
 <div class="col-lg-12">
-	<label class="control-label">Username</label>
+	<label style="font-size: 14px;" class="control-label">Username</label>
 	<div class="form-input">
 		<input type="text" name="username" id="username" placeholder="Enter username or email" class="form-control">
 	</div>
@@ -23,7 +23,7 @@
 </div>
 <div class="form-group row">
 <div class="col-lg-12">
-	<label class="control-label">Password</label>
+	<label style="font-size: 14px;" class="control-label">Password</label>
 	<div class="form-input">
 	<input type="password" id="password" name="password" placeholder="Enter password" class="form-control">
 	</div>
@@ -31,7 +31,7 @@
 </div>
 <div class="custom-control custom-checkbox mb-3">
 <input type="checkbox" class="custom-control-input" id="customCheck" name="example1">
-<label class="custom-control-label" for="customCheck">Remember Password</label>
+<label style="font-size: 14px;" class="custom-control-label" for="customCheck">Remember Password</label>
 </div>
 <div class="form-group row">
 <div class="col-lg-12">
@@ -40,7 +40,7 @@
 </div>
 <div class="form-group row">
 <div class="col-lg-12 text-center">
-Having trouble with your password? <a href="#">Forgot Password</a>
+<p style="font-size: 14px;">Having trouble with your password? <a href="#">Forgot Password</a></p>
 </div>  			
 </div>
 </form>

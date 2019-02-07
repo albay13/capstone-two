@@ -108,7 +108,7 @@ class crud{
 			$sub_array[] = $rows["ticket_title"];
 			$sub_array[] = $priority;
 			$sub_array[] = $rows["ticket_status"];
-			$sub_array[] = '<a href="view_ticket.php?ticket_id='.$rows["id"].'" data-toggle="tooltip" title="View Ticket" class="btn btn-warning btn-sm text-light"><i class="fa fa-eye"></i></a> | <a data-toggle="tooltip" title="Edit" class="btn btn-info btn-sm text-light"><i class="fa fa-cog"></i></a> | <a data-toggle="tooltip" title="Delete" class="btn btn-danger btn-sm text-light"><i class="fa fa-trash"></i></a>';
+			$sub_array[] = '<a href="view_ticket.php?ticket_id='.$rows["id"].'" data-toggle="tooltip" title="View Ticket" class="btn btn-warning btn-sm text-light"><i class="fa fa-eye"></i></a> | <a data-toggle="tooltip" title="Edit" class="btn btn-info btn-sm text-light"><i class="fa fa-cog"></i></a> | <a data-id="'.$rows["id"].'" data-toggle="tooltip" title="Delete" class="btn btn-danger btn-sm text-light delete"><i class="fa fa-trash"></i></a>';
 			$data[]      = $sub_array;
 	    }
 		$output = array(

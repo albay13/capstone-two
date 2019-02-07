@@ -13,7 +13,7 @@ include '../../core/init.php';
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url.'assets/css/main.min.css'; ?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url.'assets/css/style.css';?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url.'assets/font-awesome/css/font-awesome.min.css';?>">
-	<link href="https://fonts.googleapis.com/css?family=Dosis|Merienda+One" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url.'assets/select2/dist/css/select2.min.css';?>">
 	<link href="<?php echo base_url.'assets/themify-icons/css/themify-icons.css';?>" rel="stylesheet" />
     <style type="text/css">
@@ -44,7 +44,7 @@ include '../../core/init.php';
             		<div class="col-lg-12">
                         <div class="ibox">
                             <div class="ibox-head">
-                                <div class="ibox-title">All Categories</div>
+                                <div class="ibox-title">Parent Categories</div>
                                 <div class="ibox-tools">
                                     <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
                                     <a class="fullscreen-link"><i class="fa fa-expand"></i></a>
@@ -56,14 +56,14 @@ include '../../core/init.php';
                                 <tr>
                                     <th style="text-align: center;">Icon</th>
                                     <th>Name</th>
-                                    <th>Actions</th>
+                                    <th style="text-align: center;">Actions</th>
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr>
-                                    <th style="text-align: center;"Icon</th>
+                                    <th style="text-align: center;">Icon</th>
                                     <th>Name</th>
-                                    <th>Actions</th>
+                                    <th style="text-align: center;">Actions</th>
                                 </tr>
                             </tfoot>
                             <tbody>
@@ -74,7 +74,7 @@ include '../../core/init.php';
                                 <tr>
                                     <td style="text-align: center;"><?php echo "<img src='../../user/uploaded_images/".$row["category_icon"]."' style='width:80px;height:80px;'>"; ?></td>
                                     <td><?php echo $row["category_name"]; ?></td>
-                                    <td><a href="edit_categories.php?id=<?php echo $row["id"]; ?>" data-toggle="tooltip" title="Edit" class="btn btn-info btn-sm text-light"><i class="fa fa-cog"></i></a> | <a data-toggle="tooltip" data-id="<?php echo $row["id"]; ?>" title="Delete" class="btn btn-danger btn-sm text-light delete"><i class="fa fa-trash"></i></a></td>
+                                    <td style="text-align: center;"><a href="edit_categories.php?id=<?php echo $row["id"]; ?>" data-toggle="tooltip" title="Edit" class="btn btn-info btn-sm text-light"><i class="fa fa-cog"></i></a> | <a data-toggle="tooltip" data-id="<?php echo $row["id"]; ?>" title="Delete" class="btn btn-danger btn-sm text-light delete"><i class="fa fa-trash"></i></a></td>
                                 </tr>
                                 <?php
                                     }

@@ -23,6 +23,7 @@
     <label class="control-label col-lg-3">Category Icon</label>
     <div class="col-lg-9 form-input">
     	<div class="form-input">
+        <img src="<?php echo base_url.'user/uploaded_images/'.$row["category_icon"]; ?>" width="80" height="80">
         <input type="file" class="form-control" name="category_icon" id="category_icon" required>
         </div>
         <small>If no file is selected, default icon will be used. Recommended size: 80x80</small>
@@ -37,13 +38,13 @@
                 $parent = $crud->fetch_data("SELECT * FROM categories_tbl");
                 foreach($parent as $row_parent){
             ?>
-                <option value="<?php echo $row_parent["id"]; ?>"><?php echo $row_parent["category_name"]; ?></option>
+                <option <?php if($row_parent["id"] == $row["user_group"]){echo 'selected';}; ?> value="<?php echo $row_parent["id"]; ?>"><?php echo $row_parent["category_name"]; ?></option>
             <?php
                 }
             ?>
         </select>
         <div class="form-input">
         </div>
-        <small><?php echo $row["user_group"]; ?> If you assign a user group to this category, only users in that user group will be able to access tickets in this category.</small>
+        <small>If you assign a user group to this category, only users in that user group will be able to access tickets in this category.</small>
     </div>
 </div>

@@ -4,7 +4,7 @@ include '../../core/init.php';
 <!DOCTYPE html>
 <html>
 <head>
-	<title>All Tickets | Tickets</title>
+	<title>Status | Tickets</title>
 	<meta charset="utf-8">
 	<meta name="viewpoert" content="width=device-width, initial-scale=1">
 	<link rel="icon" href="<?php echo base_url."assets/images/rephil.png" ?>">
@@ -14,9 +14,10 @@ include '../../core/init.php';
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url.'assets/css/style.css';?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url.'assets/font-awesome/css/font-awesome.min.css';?>">
 	<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
-	<link href="<?php echo base_url.'assets/themify-icons/css/themify-icons.css';?>" rel="stylesheet" />
+    <link href="<?php echo base_url.'assets/themify-icons/css/themify-icons.css';?>" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url.'assets/jquery-minicolors/jquery.minicolors.css'; ?>">
     <style type="text/css">
-        .toolbar,.custom_view{
+        .toolbar{
             float: right;
         }
     </style>
@@ -26,53 +27,50 @@ include '../../core/init.php';
 		<?php
 			include '../../includes/header.php';
 			include '../../includes/sidenav.php';
-        ?>
+		?>
 		<div class="content-wrapper">
 			<div class="page-heading">
-				<h1 class="page-title"><i class="fa fa-send"></i> Tickets</h1>
+				<h1 class="page-title"><i class="fa fa-send"></i> Status</h1>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
                         <a href="index.html"><i class="fa fa-home font-20"></i> Home</a>
                     </li>
                     <li class="breadcrumb-item">Tickets</li>
-                    <li class="breadcrumb-item"><a href="ticket.php">All Tickets</a></li>
+                    <li class="breadcrumb-item"><a href="ticket.php">Edit Custom Status</a></li>
                 </ol>
             </div>
+            <?php 
+                if(isset($_POST["add_custom_status"])){
+                    $data = array(
+                        "status_name" => mysqli_real_escape_string($con,$_POST["status_name"]),
+                        "bg_color" => mysqli_real_escape_string($con,$_POST["status_bgcolor"]),
+                        "text_color" => mysqli_real_escape_string($con,$_POST["status_fontcolor"]),
+                        "visibility_status" => "1"
+                    );
+                    if($crud->insert_data("status_tbl",$data)){
+                        echo '<div class="alert alert-success alert-bordered"><strong>Success!</strong> Custom status was added</div>';
+                    }else{
+                        echo '<div class="alert alert-danger alert-bordered"><strong>Failed!</strong> Custom status was not added</div>';
+                    }
+                }
+            ?>
              <div class="page-content fade-in-up">
             	<div class="row">
             		<div class="col-lg-12">
                         <div class="ibox">
                             <div class="ibox-head">
-                                <div class="ibox-title">All Tickets <div class="custom_view"></div></div>
+                                <div class="ibox-title">Edit Custom Status</div>
                                 <div class="ibox-tools">
                                     <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
                                     <a class="fullscreen-link"><i class="fa fa-expand"></i></a>
                                 </div>
                             </div>
                             <div class="ibox-body">
-                            <div id="filter_ticket_tbl" for="For filtering table">
-                            	 <table class="table table-striped table-bordered table-hover" id="ticket_tbl"  cellspacing="0" width="100%">
-                            <thead>
-                                <tr>
-                                    <th>Title</th>
-                                    <th style="text-align: center;">Priority</th>
-                                    <th style="text-align: center;">Status</th>
-                                    <th style="text-align: center;">Actions</th>
-                                </tr>
-                            </thead>
-                            <tfoot>
-                                <tr>
-                                    <th>Title</th>
-                                    <th style="text-align: center;">Priority</th>
-                                    <th style="text-align: center;">Status</th>
-                                    <th style="text-align: center;">Actions</th>
-                                </tr>
-                            </tfoot>
-                            <tbody>
-                                
-                            </tbody>
-                            </table>
-                            </div>
+                            	<form id="edit_status_form" name="edit_status_form+form" method="post">
+                                    <?php
+                                        include '../../includes/edit_status.form.php';
+                                    ?>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -84,6 +82,21 @@ include '../../core/init.php';
             </footer>
         </div>
     </div>
+    <!-- Modals -->
+    <div class="modal fade" id="add_status_modal">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h5 class="modal-title"><i class="fa fa-send"></i> Add Custom Status</h5>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+            <?php include '../../includes/add_status.form.php'; ?>
+        </div>
+      </div>
+    </div>
+    
 </body>
 	<script src="<?php echo base_url.'assets/js/jquery-3.3.1.min.js'?>"></script>
 	<script type="text/javascript" src="<?php echo base_url.'assets/js/popper.min.js';?>"></script>
@@ -92,51 +105,39 @@ include '../../core/init.php';
 	<script src="<?php echo base_url.'assets/js/jquery-slimscroll/jquery.slimscroll.min.js'?>" type="text/javascript"></script>
 	 <script src="<?php echo base_url.'assets/DataTables/datatables.min.js';?>" type="text/javascript"></script>
  	<script src="<?php echo base_url.'assets/js/app.min.js'; ?>" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/jquery.validate.js"></script>
+    <script src="<?php echo base_url.'assets/js/validations.js'; ?>"></script>
     <script src="<?php echo base_url.'/assets/sweetDist/sweetalert.min.js';?>"></script>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url.'assets/sweetDist/sweetalert.css';?>">
+    <script type="text/javascript" src="<?php echo base_url.'assets/jquery-minicolors/jquery.minicolors.min.js'; ?>"></script>
  	<script src="<?php echo base_url.'assets/js/script.js'; ?>"></script>
- 	 <script type="text/javascript">
-        $(function() {
-
-            custom_view();
-            added_buttons();
-            function custom_view(id = ''){
-                var table = $('#ticket_tbl').DataTable({
-                  rowCallback: function(row, data, index){
-                    $(row).find('td:eq(1)').css({'text-align':'center'});
-                    $.post(
-                        "<?php echo base_url.'core/ajax/fetch_status_property.php'; ?>",
-                        {id:data[2]},
-                        function(data){
-                            var obj = JSON.parse(data);
-                            $(row).find('td:eq(2)').text(obj.status_name);
-                            $(row).find('td:eq(2)').css({'color':"#"+obj.fontcolor,'background-color':"#"+obj.bgcolor,'text-align':'center'});
-                            $(row).find('td:eq(3)').css({'text-align':'center'});
-                        }
-                    );
-                  },
-                  "dom": '<"toolbar">frtip',
-                  "processing" : true,
-                  "serverSide" : true,
-                  "order" : [],
-                  "searching" : false,
-                  "ajax" :{
-                    url:"<?php echo base_url.'core/ajax/fetch_custom_views.php'; ?>",
-                    method:"POST",
-                    data:{id:id},
-                   },
+    <script type="text/javascript">
+       $(document).ready(function(){
+            $('.minicolors').each(function(){
+                $(this).minicolors({
+                    theme:"bootstrap",
+                    control:$(this).attr("data-control")||"hue",
+                    format: $(this).attr('data-format') || 'hex',
+                    opacity:$(this).attr("data-opacity"),
+                    swatches: $(this).attr('data-swatches') ? $(this).attr('data-swatches').split('|') : [],
+                    position: $(this).attr('data-position') || 'bottom left',
                 });
-                 added_buttons();
-            }
-          
-           $("div.custom_view").html("<?php $crud->custom_view(); ?>");
-           $(".filter-table").on('click',function(){
-                var id = $(this).data('id');
-                $("#ticket_tbl").DataTable().destroy();
-                custom_view(id);
             });
-           $(".delete").on('click',function(){
-                var ticket_id = $(this).data('id');
+       });
+   </script>
+ 	<script type="text/javascript">
+        $(function() {
+            // DataTables Settings
+            var table = $('#status-table').DataTable({
+              "dom": '<"toolbar">frtip',
+            });
+            $("div.toolbar")
+                     .html('<button class="btn btn-primary btn-sm ml-2" type="button" id="add_status"><i class="fa fa-plus"></i> Add Status</button>');
+            $("#add_status").on('click',function(){
+                    $("#add_status_modal").modal("show");
+            });
+             $(".delete").on('click',function(){
+                var status_id = $(this).data('id');
                 swal({
                   title: "Are you sure?",
                   text: "You will not be able to recover this data",
@@ -152,22 +153,18 @@ include '../../core/init.php';
                   if (isConfirm) {
                     $.post(
                         "<?php echo base_url.'core/ajax/delete_data.php'; ?>",
-                        {ticket_id:ticket_id},
+                        {status_id:status_id},
                         function(data){
-                            swal({title:"Deleted!",text:"You have successfully deleted a ticket",type:"success"},function(){
+                            swal({title:"Deleted!",text:"You have successfully deleted a category",type:"success"},function(){
                                     location.reload();
                             });
                         }
                     );
                   } else {
-                    swal("Cancelled", "Ticket was not deleted!", "error");
+                    swal("Cancelled", "Status was not deleted!", "error");
                   }
                 });
             });
-            function added_buttons(){
-                $("div.toolbar")
-                     .html('<a class="btn btn-primary btn-sm ml-2" href="add_ticket.php" id="add_ticket"><i class="fa fa-plus"></i> Add Ticket</a>');
-            }  
-        })
+        });
     </script>
 </html>

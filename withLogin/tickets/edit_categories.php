@@ -13,7 +13,7 @@ include '../../core/init.php';
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url.'assets/css/main.min.css'; ?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url.'assets/css/style.css';?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url.'assets/font-awesome/css/font-awesome.min.css';?>">
-	<link href="https://fonts.googleapis.com/css?family=Dosis|Merienda+One" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url.'assets/select2/dist/css/select2.min.css';?>">
 	<link href="<?php echo base_url.'assets/themify-icons/css/themify-icons.css';?>" rel="stylesheet" />
     <style type="text/css">
@@ -36,7 +36,7 @@ include '../../core/init.php';
                         <a href="index.html"><i class="fa fa-home font-20"></i> Home</a>
                     </li>
                     <li class="breadcrumb-item">Tickets</li>
-                    <li class="breadcrumb-item"><a href="ticket.php">Edit Category</a></li>
+                    <li class="breadcrumb-item"><a href="ticket.php">Edit Parent Category</a></li>
                 </ol>
             </div>
              <div class="page-content fade-in-up">
@@ -44,7 +44,7 @@ include '../../core/init.php';
             		<div class="col-lg-12">
                         <div class="ibox">
                             <div class="ibox-head">
-                                <div class="ibox-title">Edit Category</div>
+                                <div class="ibox-title">Edit Parent Category</div>
                                 <div class="ibox-tools">
                                     <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
                                     <a class="fullscreen-link"><i class="fa fa-expand"></i></a>

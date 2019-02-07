@@ -2,8 +2,8 @@
     <div class="form-group row">
         <label class="control-label col-lg-3" for="ticket_title"> Title</label>
         <div class="col-lg-9">
-            <input type="text" name="ticket_title" id="ticket_title" class="form-control" placeholder="Enter ticket title" maxlength="70" required>
-            <small id="text-counter">Text Count : <span class="text-count">0</span>/70</small>
+            <input type="text" name="ticket_title" id="ticket_title" class="form-control" placeholder="Enter ticket title" maxlength="40" required>
+            <small id="text-counter">Text Count : <span class="text-count">0</span>/40</small>
         </div>
 
     </div>

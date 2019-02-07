@@ -42,3 +42,10 @@ if(isset($_POST["question_id"])){
 		return false;
 	}
 }
+if(isset($_POST["ticket_id"])){
+	if($crud->delete_data("ticket_info_tbl"," SET visibility_status = 0 WHERE id=".$_POST["ticket_id"])){
+		return true;
+	}else{
+		return false;
+	}
+}

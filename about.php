@@ -7,7 +7,7 @@ if(isset($_SESSION["id"])){
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Home | Rephil IT Help Desk</title>
+	<title>About | Rephil IT Help Desk</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" href="assets/images/rephil.png">
@@ -15,38 +15,35 @@ if(isset($_SESSION["id"])){
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 	<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+	<style type="text/css">
+		.parallax{
+			background-image: url("assets/images/header-img.jpeg");
 
+			/* Set a specific height */
+			height: 220px; 
+
+			/* Create the parallax scrolling effect */
+			background-attachment: fixed;
+			background-position: center;
+			background-repeat: no-repeat;
+			background-size: cover;
+			padding-top: 100px;
+			text-align: center;
+		}
+	</style>
 </head>
-<body class="without-login">
+<body>
 	<?php 
 		include 'includes/nav.html';
 	?>
-	<br/><br/>
+	<div class="parallax">
+	</div>
 	<div class="container">
-		<div class="row">
-			<div class="col-lg-6">
-				<!-- Material form login -->
-				<div class="card wow fadeInUp" style="border:transparent; opacity: 0.8">
-				  <div class="card-header bg-dark black-text py-4 text-light" style="border-bottom: 1px solid white;">
-				   	<div class="float-left">
-				   	<h5 style="font-size: 15px;">Login via</h5>
-				   	<h6 style="font-size: 14px;">Account Information</h6>
-				   	</div>
-				   	<div class="float-right">
-				   		<i class="fas fa-lock fa-3x"></i>
-				   	</div>
-				  </div>
-				  <div class="card-body bg-dark" >
-				  	<?php 
-				  		include 'includes/login.form.php';
-				  	?>
-				  </div>
-				</div>
-			</div>
-		</div>
-		<br/>
 		<center>
-			<p class="text-light">2019 © <b>Pahiram.ph</b> - All rights reserved.</p>
+		<div class="card" style="margin-top: -50px; width: 700px;">
+			<h2 class="text-dark p-3 text-center">About Us</h2>
+			
+		</div>
 		</center>
 	</div>
 </body>

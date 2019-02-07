@@ -2,13 +2,18 @@
 	margin: 0;
 	padding: 0;
 }
-body{
-	font-family: 'Dosis' !important, sans-serif;
+@font-face {
+  font-family: 'Quicksand', sans-serif; 
+  src: url("https://fonts.googleapis.com/css?family=Quicksand");
+}
+body,html{
+	font-family: 'Quicksand', sans-serif;
 }
 body.without-login{
 	background-image: url("../images/login-bg.jpg");
 	background-repeat: no-repeat;
 	width: 100%;
+  font-family: 'Quicksand', sans-serif;
 }
 /*divider horizontal line*/
 .divider-new {

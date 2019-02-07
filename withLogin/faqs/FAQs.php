@@ -17,7 +17,7 @@
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url.'assets/css/main.min.css'; ?>">
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url.'assets/css/style.css';?>">
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url.'assets/font-awesome/css/font-awesome.min.css';?>">
-		<link href="https://fonts.googleapis.com/css?family=Dosis|Merienda+One" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
 		<link href="<?php echo base_url.'assets/themify-icons/css/themify-icons.css';?>" rel="stylesheet" />
 		<style type="text/css">
             .toolbar{
@@ -76,8 +76,8 @@
                                 ?>
                                 <tr>
                                     <td><?php echo $rows["questions"]; ?></td>
-                                    <td><?php echo $rows["date_created"]; ?></td>
-                                    <td><a href="view_ticket.php?ticket_id=<?php echo $rows["id"]; ?>" data-toggle="tooltip" title="Views" class="btn btn-info btn-sm text-light"><i class="fa fa-eye"></i></a> | <a data-id="<?php echo $rows["id"]; ?>" data-toggle="tooltip" title="Delete" class="btn btn-danger btn-sm text-light delete"><i class="fa fa-trash"></i></a></td>
+                                    <td style="text-align: center;"><?php echo $rows["date_created"]; ?></td>
+                                    <td style="text-align: center;"><a href="view_ticket.php?ticket_id=<?php echo $rows["id"]; ?>" data-toggle="tooltip" title="Views" class="btn btn-info btn-sm text-light"><i class="fa fa-cog"></i></a> | <a data-id="<?php echo $rows["id"]; ?>" data-toggle="tooltip" title="Delete" class="btn btn-danger btn-sm text-light delete"><i class="fa fa-trash"></i></a></td>
                                 </tr>
                                 <?php
                                     }

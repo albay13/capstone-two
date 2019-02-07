@@ -13,7 +13,7 @@ include '../../core/init.php';
         <link rel="stylesheet" type="text/css" href="<?php echo base_url.'assets/css/main.min.css'; ?>">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url.'assets/css/style.css';?>">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url.'assets/font-awesome/css/font-awesome.min.css';?>">
-        <link href="https://fonts.googleapis.com/css?family=Dosis|Merienda+One" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
         <link href="<?php echo base_url.'assets/themify-icons/css/themify-icons.css';?>" rel="stylesheet" />
         <style type="text/css">
         .toolbar{
@@ -154,7 +154,7 @@ include '../../core/init.php';
                                     <div class="container">
                                         <div class=" row">
                                             <div class="btn-group mr-1">
-                                                <button type="button" class="btn btn-primary dropdown-toggle btn-xs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  data-toggle="tooltip" title="Change status">
+                                                <button type="button" class="btn btn-primary dropdown-toggle btn-xs actions-btn"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  data-toggle="tooltip" title="Change status">
                                                 <i class="fa fa-exchange"></i>
                                                 </button>
                                                 <div class="dropdown-menu">
@@ -237,9 +237,13 @@ include '../../core/init.php';
         "<?php echo base_url.'core/ajax/changed_status.php'; ?>",
         {ticket_id:"<?php echo $ticket_id; ?>",status:value},
         function(data){
-        swal({title:"Success",text:data,type:'success'}).then(function(){
-        location.reload();
-        });
+            $('.actions-btn').html('<i class="fa fa-spin fa-spinner"></i>');
+            setTimeout(function(){
+                $('.actions-btn').html('<i class="fa fa-exchange"></i>');
+                swal({title:"Success",text:data,type:'success'}).then(function(){
+                    location.reload();
+                });
+            },2000);
         }
         );
         });

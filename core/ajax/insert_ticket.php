@@ -28,21 +28,44 @@ if(isset($_FILES["uploaded_file"]["name"]) && $_FILES["uploaded_file"]["name"] !
 					"visibility_status" => "1"
 				);
 				if ($crud->insert_data("ticket_info_tbl",$ticket_info)) {
-					echo 'Ticket was successfully added';
+					$json_data = '{
+						"title":"Success!",
+						"type":"success",
+						"data":"Ticket was successfully added"
+					}';
+					echo $json_data;
 				}else{
-					echo 'Ticket was not added.';
+					$json_data = '{
+						"title":"Failed!"
+						"type":"error",
+						"data":"Ticket was not added."
+					}';
+					echo $json_data;
 				}
 			}else{
-					echo "Creating ticket failed.";
+					$json_data = '{
+						"title":"Failed!"
+						"type":"error",
+						"data":"Creating ticket failed."
+					}';
+					echo $json_data;
 					
 			}	
 		}else{
-			echo "There are some error";
-			return false;
+				$json_data = '{
+					"title":"Failed!"
+					"type":"error",
+					"data":"There are some error"
+				}';
+				echo $json_data;
 		}	
 	}else{
-		echo "Invalid File Type";
-		return false;
+		$json_data = '{
+			"title":"Failed!"
+			"type":"error",
+			"data":"Invalid File Type"
+		}';
+		echo $json_data;
 	}
 }else{
 	return false;

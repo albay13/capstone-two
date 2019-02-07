@@ -18,13 +18,13 @@ if(isset($_POST["id"]) && $_POST["id"] != ''){
 		$order_by = $row_criteria["order_by"];
 		$sort_by  = $row_criteria["sort_by"];
 		$status   = $row_criteria["status"];
-		$query    .= "INNER JOIN ticket_tbl ON ticket_info_tbl.ticket_id = ticket_tbl.id WHERE ticket_info_tbl.ticket_status = '$status' ORDER BY '$order_by' '$sort_by'";
+		$query    .= "INNER JOIN ticket_tbl ON ticket_info_tbl.ticket_id = ticket_tbl.id WHERE ticket_info_tbl.ticket_status = '$status' AND ticket_info_tbl.visibility_status = '1' ORDER BY '$order_by' '$sort_by'";
 	}else{
 		$order_by = $row_criteria["order_by"];
 		$sort_by  = $row_criteria["sort_by"];
 		$status   = $row_criteria["status"];
 		$category = $row_criteria["category"];
-		$query    .="INNER JOIN ticket_tbl ON ticket_info_tbl.ticket_id = ticket_tbl.id WHERE ticket_info_tbl.ticket_status = '$status' AND ticket_tbl.ticket_category_id = '$category' ORDER BY '$order_by' '$sort_by'";
+		$query    .="INNER JOIN ticket_tbl ON ticket_info_tbl.ticket_id = ticket_tbl.id WHERE ticket_info_tbl.ticket_status = '$status' AND ticket_tbl.ticket_category_id = '$category' AND ticket_info_tbl.visibility_status = '1' ORDER BY '$order_by' '$sort_by'";
 	}
 	$crud->filter_table($query);
 }else{

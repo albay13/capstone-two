@@ -13,7 +13,7 @@ include '../../core/init.php';
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url.'assets/css/main.min.css'; ?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url.'assets/css/style.css';?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url.'assets/font-awesome/css/font-awesome.min.css';?>">
-	<link href="https://fonts.googleapis.com/css?family=Dosis|Merienda+One" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
 	<link href="<?php echo base_url.'assets/themify-icons/css/themify-icons.css';?>" rel="stylesheet" />
     <style type="text/css">
         .toolbar{
@@ -89,11 +89,11 @@ include '../../core/init.php';
                     if(length == 0){
                         $("#text-counter").hide();
                         $(".text-count").text(0);
-                    }else if(length > 0 && length < 70){
+                    }else if(length > 0 && length < 40){
                         $("#text-counter").show();
                         $(".text-count").text(length);
                         $("#text-counter").css("color","black");
-                    }else if(length == 70){
+                    }else if(length == 40){
                         $("#text-counter").show();
                         $(".text-count").text(length);
                         $("#text-counter").css("color","red");
@@ -131,10 +131,11 @@ include '../../core/init.php';
                                 cache:false,
                                 processData:false,
                                 success:function(data){
+                                    var obj = JSON.parse(data);
                                     btn.html("<i class='fa fa-spinner fa-spin'></i> Processing");
                                     setTimeout(function(){
                                         btn.html(default_btn);
-                                        swal({title:"Success",text:data,type:'success'}).then(function(){
+                                        swal({title:obj.title,text:obj.data,type:obj.type}).then(function(){
                                             location.reload();
                                         });
                                     },2000);

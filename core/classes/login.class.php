@@ -6,6 +6,7 @@ class login{
 		$this->if_logout();
 	}
 	function check_user($username,$password){
+		$password = md5($password);
 		$query = "SELECT * FROM accounts_tbl where username = '$username' AND password = '$password'";
 		$result = mysqli_query($this->con,$query);
 		$row = mysqli_fetch_array($result);

@@ -35,7 +35,7 @@ include '../../core/init.php';
                         <a href="index.html"><i class="fa fa-home font-20"></i> Home</a>
                     </li>
                     <li class="breadcrumb-item">Tickets</li>
-                    <li class="breadcrumb-item"><a href="ticket.php">Custom Views</a></li>
+                    <li class="breadcrumb-item"><a href="ticket.php">Edit Custom View</a></li>
                 </ol>
             </div>
              <div class="page-content fade-in-up">
@@ -43,46 +43,16 @@ include '../../core/init.php';
                     <div class="col-lg-12">
                         <div class="ibox">
                             <div class="ibox-head">
-                                <div class="ibox-title">All Query</div>
+                                <div class="ibox-title">Edit Custom View</div>
                                 <div class="ibox-tools">
                                     <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
                                     <a class="fullscreen-link"><i class="fa fa-expand"></i></a>
                                 </div>
                             </div>
                             <div class="ibox-body">
-                                 <table class="table table-striped table-bordered table-hover" id="ticket_tbl" cellspacing="0" width="100%">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th style="text-align: center;">Status</th>
-                                    <th style="text-align: center;">Category</th>
-                                    <th style="text-align: center;">Actions</th>
-                                </tr>
-                            </thead>
-                            <tfoot>
-                                <tr>
-                                   <th>Name</th>
-                                    <th style="text-align: center;">Status</th>
-                                    <th style="text-align: center;">Category</th>
-                                    <th style="text-align: center;">Actions</th>
-                                </tr>
-                            </tfoot>
-                            <tbody>
-                                <?php
-                                    $views = $crud->fetch_data("SELECT * FROM custom_views_tbl WHERE view_status = '1'");
-                                    foreach($views as $rows){
-                                ?>
-                                <tr>
-                                    <td><?php echo $rows["name"]; ?></td>
-                                    <td style="text-align: center;"><?php echo $rows["status"]; ?></td>
-                                    <td style="text-align: center;"><?php echo $rows["category"]; ?></td>
-                                    <td style="text-align: center;"><a href="edit_custom_view.php?id=<?php echo $rows["id"]; ?>" data-toggle="tooltip" title="Edit" class="btn btn-info btn-sm text-light"><i class="fa fa-cog"></i></a> | <a data-id="<?php echo $rows["id"]; ?>" data-toggle="tooltip" title="Delete" class="btn btn-danger btn-sm text-light delete"><i class="fa fa-trash"></i></a></td>
-                                </tr>
-                                <?php
-                                    }
-                                ?>
-                            </tbody>
-                            </table>
+                                <form id="edit_custom_views_form" name="edit_custom_views_form" method="post"> 
+                                    <?php include '../../includes/edit_custom_view.form.php'; ?>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -143,35 +113,6 @@ include '../../core/init.php';
                             }
                         );
                     }
-            });
-             $(".delete").on('click',function(){
-                var view_id = $(this).data('id');
-                swal({
-                  title: "Are you sure?",
-                  text: "You will not be able to recover this data",
-                  type: "warning",
-                  showCancelButton: true,
-                  confirmButtonClass: "btn-danger",
-                  confirmButtonText: "Yes, delete it!",
-                  cancelButtonText: "No, cancel plx!",
-                  closeOnConfirm: false,
-                  closeOnCancel: false
-                },
-                function(isConfirm) {
-                  if (isConfirm) {
-                    $.post(
-                        "<?php echo base_url.'core/ajax/delete_data.php'; ?>",
-                        {view_id:view_id},
-                        function(data){
-                            swal({title:"Deleted!",text:"You have successfully deleted a custom view",type:"success"},function(){
-                                    location.reload();
-                            });
-                        }
-                    );
-                  } else {
-                    swal("Cancelled", "Custom view was not deleted!", "error");
-                  }
-                });
             });
         })  
     </script>

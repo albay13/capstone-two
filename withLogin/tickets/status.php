@@ -13,8 +13,9 @@ include '../../core/init.php';
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url.'assets/css/main.min.css'; ?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url.'assets/css/style.css';?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url.'assets/font-awesome/css/font-awesome.min.css';?>">
-	<link href="https://fonts.googleapis.com/css?family=Dosis|Merienda+One" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
     <link href="<?php echo base_url.'assets/themify-icons/css/themify-icons.css';?>" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url.'assets/jquery-minicolors/jquery.minicolors.css'; ?>">
     <style type="text/css">
         .toolbar{
             float: right;
@@ -87,8 +88,8 @@ include '../../core/init.php';
                                ?>
                                 <tr>
                                     <td style=" width: 40%;"><?php echo $row["status_name"]; ?></td>
-                                    <td style="text-align:center; width: 30%; background-color: <?php echo "#".$row["bg_color"]; ?>"><p style="color: <?php echo "#".$row["text_color"]; ?>"><?php echo "#".$row["text_color"]; ?></p></td>
-                                    <td style="text-align: center; width: 30%;"><a  href="edit_custom_status.php?id=<?php echo $row["id"]; ?>" data-toggle="tooltip" title="Edit" data-id="<?php echo $row["id"]; ?>" class="text-light btn btn-primary btn-xs edit"><i class="fa fa-cog"></i></a> | <a data-toggle="tooltip" title="Delete" data-id="<?php echo $row["id"]; ?>" class="text-light btn btn-danger btn-xs delete"><i class="fa fa-trash"></i></a></td>
+                                    <td style="text-align:center; width: 30%; background-color: <?php echo $row["bg_color"]; ?>"><p style="color: <?php echo $row["text_color"]; ?>"><?php echo $row["text_color"]; ?></p></td>
+                                    <td style="text-align: center; width: 30%;"><a  href="edit_status.php?id=<?php echo $row["id"]; ?>" data-toggle="tooltip" title="Edit" data-id="<?php echo $row["id"]; ?>" class="text-light btn btn-primary btn-xs edit"><i class="fa fa-cog"></i></a> | <a data-toggle="tooltip" title="Delete" data-id="<?php echo $row["id"]; ?>" class="text-light btn btn-danger btn-xs delete"><i class="fa fa-trash"></i></a></td>
                                 </tr>
                                <?php
                                 }
@@ -133,7 +134,23 @@ include '../../core/init.php';
     <script src="<?php echo base_url.'assets/js/validations.js'; ?>"></script>
     <script src="<?php echo base_url.'/assets/sweetDist/sweetalert.min.js';?>"></script>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url.'assets/sweetDist/sweetalert.css';?>">
- 	<script src="<?php echo base_url.'assets/js/script.js'; ?>"></script>
+
+    <script type="text/javascript" src="<?php echo base_url.'assets/jquery-minicolors/jquery.minicolors.min.js'; ?>"></script>
+   <script src="<?php echo base_url.'assets/js/script.js'; ?>"></script>
+    <script type="text/javascript">
+       $(document).ready(function(){
+            $('.minicolors').each(function(){
+                $(this).minicolors({
+                    theme:"bootstrap",
+                    control:$(this).attr("data-control")||"hue",
+                    format: $(this).attr('data-format') || 'hex',
+                    opacity:$(this).attr("data-opacity"),
+                    swatches: $(this).attr('data-swatches') ? $(this).attr('data-swatches').split('|') : [],
+                    position: $(this).attr('data-position') || 'bottom left',
+                });
+            });
+       });
+   </script>
  	<script type="text/javascript">
         $(function() {
             // DataTables Settings
