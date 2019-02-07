@@ -73,14 +73,14 @@
                             </tfoot>
                             <tbody>
                                 <?php
-                                    $articles = $crud->fetch_data("SELECT * FROM articles_tbl ORDER BY date_created");
+                                    $articles = $crud->fetch_data("SELECT * FROM articles_tbl WHERE article_status = '1' ORDER BY date_created ");
                                     foreach($articles as $rows){
                                 ?>
                                 <tr>
                                     <td><?php echo $rows["article_title"]; ?></td>
                                     <td><?php echo $rows["article_category"]; ?></td>
                                     <td><?php echo $rows["date_created"]; ?></td>
-                                    <td><a href="view_ticket.php?ticket_id=<?php echo $rows["id"]; ?>" data-toggle="tooltip" title="Views" class="btn btn-info btn-sm text-light"><i class="fa fa-eye"></i></a> | <a href="view_ticket.php?ticket_id=<?php echo $rows["id"]; ?>" data-toggle="tooltip" title="Delete" class="btn btn-danger btn-sm text-light"><i class="fa fa-trash"></i></a></td>
+                                    <td><a href="view_ticket.php?ticket_id=<?php echo $rows["id"]; ?>" data-toggle="tooltip" title="Views" class="btn btn-info btn-sm text-light"><i class="fa fa-eye"></i></a> | <a  data-id="<?php echo $rows["id"]; ?>" data-toggle="tooltip" title="Delete" class="btn btn-danger btn-sm text-light delete"><i class="fa fa-trash"></i></a></td>
                                 </tr>
                                 <?php
                                     }
@@ -110,6 +110,8 @@
 	<script src="<?php echo base_url.'assets/js/jquery-slimscroll/jquery.slimscroll.min.js'?>" type="text/javascript"></script>
 	<script src="<?php echo base_url.'assets/js/app.min.js'; ?>" type="text/javascript"></script>
     <script src="<?php echo base_url.'assets/DataTables/datatables.min.js';?>" type="text/javascript"></script>
+    <script src="<?php echo base_url.'/assets/sweetDist/sweetalert.min.js';?>"></script>
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url.'assets/sweetDist/sweetalert.css';?>">
     <script src="<?php echo base_url.'assets/js/script.js'; ?>"></script>
      <script type="text/javascript">
         $(function() {
@@ -120,6 +122,35 @@
                      .html('<a class="btn btn-primary btn-sm ml-2" href="add_article.php" id="add_ticket"><i class="fa fa-plus"></i> Add Article</a>');
             $("#add_status").on('click',function(){
                     $("#add_category_modal").modal("show");
+            });
+            $(".delete").on('click',function(){
+                var article_id = $(this).data('id');
+                swal({
+                  title: "Are you sure?",
+                  text: "You will not be able to recover this data",
+                  type: "warning",
+                  showCancelButton: true,
+                  confirmButtonClass: "btn-danger",
+                  confirmButtonText: "Yes, delete it!",
+                  cancelButtonText: "No, cancel plx!",
+                  closeOnConfirm: false,
+                  closeOnCancel: false
+                },
+                function(isConfirm) {
+                  if (isConfirm) {
+                    $.post(
+                        "<?php echo base_url.'core/ajax/delete_data.php'; ?>",
+                        {article_id:article_id},
+                        function(data){
+                            swal({title:"Deleted!",text:"You have successfully deleted an article",type:"success"},function(){
+                                    location.reload();
+                            });
+                        }
+                    );
+                  } else {
+                    swal("Cancelled", "Article was not deleted!", "error");
+                  }
+                });
             });
         })
     </script>

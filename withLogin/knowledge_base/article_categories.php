@@ -68,13 +68,13 @@ include '../../core/init.php';
                             </tfoot>
                             <tbody>
                                 <?php
-                                    $mysql = $crud->fetch_data("SELECT * FROM article_categories_tbl");
+                                    $mysql = $crud->fetch_data("SELECT * FROM article_categories_tbl WHERE category_status = '1'");
                                     foreach ($mysql as $row) {
                                 ?>
                                 <tr>
                                     <td style="text-align: center;"><?php echo "<img src='../../user/uploaded_images/".$row["category_icon"]."' style='width:80px;height:80px;'>"; ?></td>
                                     <td><?php echo $row["category_name"]; ?></td>
-                                    <td><a data-toggle="tooltip" title="Edit" class="btn btn-info btn-sm text-light"><i class="fa fa-cog"></i></a> | <a data-toggle="tooltip" title="Delete" class="btn btn-danger btn-sm text-light"><i class="fa fa-trash"></i></a></td>
+                                    <td><a data-toggle="tooltip" title="Edit" class="btn btn-info btn-sm text-light"><i class="fa fa-cog"></i></a> | <a data-id="<?php echo $row["id"]; ?>" data-toggle="tooltip" title="Delete" class="btn btn-danger btn-sm text-light delete"><i class="fa fa-trash"></i></a></td>
                                 </tr>
                                 <?php
                                     }
@@ -121,7 +121,8 @@ include '../../core/init.php';
     <script src="<?php echo base_url.'assets/select2/dist/js/select2.full.min.js';?>" type="text/javascript"></script>
     <script src="<?php echo base_url.'assets/js/form-plugins.js';?>" type="text/javascript"></script>
     <script src="<?php echo base_url.'assets/js/validations.js'; ?>"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="<?php echo base_url.'/assets/sweetDist/sweetalert.min.js';?>"></script>
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url.'assets/sweetDist/sweetalert.css';?>">
     <script src="<?php echo base_url.'assets/js/script.js'; ?>"></script>
  	 <script type="text/javascript">
         $(function() {
@@ -166,6 +167,35 @@ include '../../core/init.php';
                             }
                         });
                     }
+            });
+            $(".delete").on('click',function(){
+                var article_category_id = $(this).data('id');
+                swal({
+                  title: "Are you sure?",
+                  text: "You will not be able to recover this data",
+                  type: "warning",
+                  showCancelButton: true,
+                  confirmButtonClass: "btn-danger",
+                  confirmButtonText: "Yes, delete it!",
+                  cancelButtonText: "No, cancel plx!",
+                  closeOnConfirm: false,
+                  closeOnCancel: false
+                },
+                function(isConfirm) {
+                  if (isConfirm) {
+                    $.post(
+                        "<?php echo base_url.'core/ajax/delete_data.php'; ?>",
+                        {article_category_id:article_category_id},
+                        function(data){
+                            swal({title:"Deleted!",text:"You have successfully deleted a category",type:"success"},function(){
+                                    location.reload();
+                            });
+                        }
+                    );
+                  } else {
+                    swal("Cancelled", "Category was not deleted!", "error");
+                  }
+                });
             });
         })
     </script>
