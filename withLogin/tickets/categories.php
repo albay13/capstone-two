@@ -63,7 +63,7 @@ include '../../core/init.php';
                                 <tr>
                                     <th style="text-align: center;">Icon</th>
                                     <th>Name</th>
-                                    <th style="text-align: center;">Actions</th>
+                                    <th style="text-align: c enter;">Actions</th>
                                 </tr>
                             </tfoot>
                             <tbody>
@@ -154,7 +154,8 @@ include '../../core/init.php';
                         "<?php echo base_url.'core/ajax/delete_data.php'; ?>",
                         {category_id:category_id},
                         function(data){
-                            swal({title:"Deleted!",text:"You have successfully deleted a category",type:"success"},function(){
+                            var obj = JSON.parse(data);
+                            swal({title:obj.title,text:obj.text,type:obj.type},function(){
                                     location.reload();
                             });
                         }
@@ -184,7 +185,7 @@ include '../../core/init.php';
                     var parent_category = $("#parent_category").val();
                     var category_icon = $("#category_icon").val();
                     var user_group = $("#user_group").val();
-                    if(category_name == '' || category_desc == '' || parent_category == ''|| category_icon == '' || user_group == ''){
+                    if(!$(this).valid()){
                        return false; 
                     }else{    
                         $.ajax({
@@ -195,11 +196,14 @@ include '../../core/init.php';
                             cache:false,
                             processData:false,
                             success:function(data){
+                                var obj = JSON.parse(data);
                                 btn.html("<i class='fa fa-spinner fa-spin'></i> Processing");
                                 setTimeout(function(){
                                     btn.html(default_btn);
                                     $("#add_category_modal").modal("hide");
-                                    swal("Success",data,'success');
+                                    swal({title:obj.title,text:obj.text,type:obj.type},function(){
+                                        location.reload();
+                                    });
                                 },2000);
                             }
                         });

@@ -49,7 +49,7 @@ include '../../core/init.php';
                                         <?php
                                         $crud->priority_badge($ticket_info["ticket_priority"]);
                                         ?> | 
-                                        <span class="badge" style="color:#<?php echo $status["text_color"]; ?>;  background-color: #<?php echo $status["bg_color"]; ?>;"><?php echo $status["status_name"]; ?></span>
+                                        <span class="badge" style="color:<?php echo $status["text_color"]; ?>;  background-color:<?php echo $status["bg_color"]; ?>;"><?php echo $status["status_name"]; ?></span>
                                     </div>
                                 </div>
                                 <div class="ibox-body">
@@ -159,7 +159,7 @@ include '../../core/init.php';
                                                 </button>
                                                 <div class="dropdown-menu">
                                                     <?php
-                                                    $status = $crud->fetch_data("SELECT * FROM status_tbl");
+                                                    $status = $crud->fetch_data("SELECT * FROM status_tbl WHERE visibility_status = '1'");
                                                     foreach($status as $get_statuses){
                                                     ?>
                                                     <a data-action="Ticket changed status" data-value="<?php echo $get_statuses["id"]; ?>" class="dropdown-item change-status"><?php echo $get_statuses["status_name"]; ?></a>

@@ -1,7 +1,9 @@
 <?php 
     $query = $crud->fetch_data("SELECT * FROM categories_tbl where id = '".$_GET["id"]."'");
     $row = mysqli_fetch_array($query);
+    
 ?>
+<input type="hidden" name="id" value="<?php echo $_GET["id"]; ?>">
 <div class="form-group row">
     <label class="control-label col-lg-3">Category Name </label>
     <div class="col-lg-9">
@@ -23,10 +25,10 @@
     <label class="control-label col-lg-3">Category Icon</label>
     <div class="col-lg-9 form-input">
     	<div class="form-input">
-        <img src="<?php echo base_url.'user/uploaded_images/'.$row["category_icon"]; ?>" width="80" height="80">
+        <img class='mb-2' src="<?php echo base_url.'user/uploaded_images/'.$row["category_icon"]; ?>" width="80" height="80">
         <input type="file" class="form-control" name="category_icon" id="category_icon" required>
         </div>
-        <small>If no file is selected, default icon will be used. Recommended size: 80x80</small>
+        <small >If no file is selected, default icon will be used. Recommended size: 80x80</small>
     </div>
 </div>
 <div class="form-group row">
@@ -46,5 +48,10 @@
         <div class="form-input">
         </div>
         <small>If you assign a user group to this category, only users in that user group will be able to access tickets in this category.</small>
+    </div>
+</div>
+<div class="form-group row">
+    <div class="col-lg-12">
+        <button id="edit_custom_category" type="submit" class="btn btn-primary btn-block">Edit Category</button>
     </div>
 </div>

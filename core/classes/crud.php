@@ -72,6 +72,23 @@ class crud{
 		$result = mysqli_query($this->con,$query);
 		return $result;
 	}
+	public function dynamic_update_data($table,$where,$fields){
+		$sql = "";
+		$condition = "";
+		foreach ($where as $key => $value) {
+			$condition .= $key . "='" . $value ."' AND ";
+		}
+		$condition = substr($condition,0,-5);
+		foreach ($fields as $key => $value) {
+			$sql .= $key . "='".$value."',";
+		}
+		$sql = substr($sql,0,-2);value ."' AND";
+		$sql = "UPDATE ".$table." SET ".$sql."' WHERE ".$condition;
+		// if(mysqli_query($this->con,$sql)){
+		// 	return true;
+		// }
+		echo $sql;
+	}
 	function custom_view(){
             $output = '';
             $output .= "<div class='dropdown'><button type='button' class='btn btn-danger dropdown-toggle btn-sm ml-2' data-toggle='dropdown'>Select custom view<span class='caret'></button><div class='dropdown-menu dm_custom_view'>";

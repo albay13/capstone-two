@@ -110,7 +110,7 @@ include '../../core/init.php';
                         function(data){
                             var obj = JSON.parse(data);
                             $(row).find('td:eq(2)').text(obj.status_name);
-                            $(row).find('td:eq(2)').css({'color':"#"+obj.fontcolor,'background-color':"#"+obj.bgcolor,'text-align':'center'});
+                            $(row).find('td:eq(2)').css({'color':obj.fontcolor,'background-color':obj.bgcolor,'text-align':'center'});
                             $(row).find('td:eq(3)').css({'text-align':'center'});
                         }
                     );

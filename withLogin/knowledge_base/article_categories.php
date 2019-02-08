@@ -187,7 +187,8 @@ include '../../core/init.php';
                         "<?php echo base_url.'core/ajax/delete_data.php'; ?>",
                         {article_category_id:article_category_id},
                         function(data){
-                            swal({title:"Deleted!",text:"You have successfully deleted a category",type:"success"},function(){
+                             var obj = JSON.parse(data);
+                            swal({title:obj.title,text:obj.text,type:obj.type},function(){
                                     location.reload();
                             });
                         }

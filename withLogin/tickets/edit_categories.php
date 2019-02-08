@@ -51,7 +51,7 @@ include '../../core/init.php';
                                 </div>
                             </div>
                             <div class="ibox-body">
-                                 <form id="add_category_form" name="add_category_form" method="post" enctype="multipart/form-data"> 
+                                 <form id="edit_category_form" name="edit_category_form" method="post" enctype="multipart/form-data"> 
                             	 <?php include '../../includes/edit_category.form.php'; ?>
                                  </form>
                             </div>
@@ -80,47 +80,35 @@ include '../../core/init.php';
     <script src="<?php echo base_url.'assets/select2/dist/js/select2.full.min.js';?>" type="text/javascript"></script>
     <script src="<?php echo base_url.'assets/js/form-plugins.js';?>" type="text/javascript"></script>
     <script src="<?php echo base_url.'assets/js/validations.js'; ?>"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="<?php echo base_url.'/assets/sweetDist/sweetalert.min.js';?>"></script>
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url.'assets/sweetDist/sweetalert.css';?>">
     <script src="<?php echo base_url.'assets/js/script.js'; ?>"></script>
  	 <script type="text/javascript">
         $(function() {
             // DataTables Settings
-            var table = $('#categories-table').DataTable({
-              "dom": '<"toolbar">frtip',
-            });
-            $("div.toolbar")
-                     .html('<button class="btn btn-primary btn-sm ml-2" type="button" id="add_status"><i class="fa fa-plus"></i> Add Category</button>');
-            $("#add_status").on('click',function(){
-                    $("#add_category_modal").modal("show");
-            });
-            $(".delete").on('click',function(){
-                return("Are you sure you want to delete?");
-            });
-            $("#add_category_form").on('submit',function(e){
+            $("#edit_category_form").on('submit',function(e){
                     e.preventDefault();
-                    var btn = $("#add_custom_category");
-                    var default_btn = "Add Custom Category";
-                    var category_name = $("#category_name").val();
-                    var category_desc = $("#category_desc").val();
-                    var parent_category = $("#parent_category").val();
-                    var category_icon = $("#category_icon").val();
-                    var user_group = $("#user_group").val();
-                    if(category_name == '' || category_desc == '' || parent_category == ''|| category_icon == '' || user_group == ''){
+                    var btn = $("#edit_custom_category");
+                    var default_btn = "Edit Category";
+                    if(!$(this).valid()){
                        return false; 
                     }else{    
                         $.ajax({
-                            url:"<?php echo base_url.'core/ajax/insert_category.php'; ?>",
+                            url:"<?php echo base_url.'core/ajax/edit_category.php'; ?>",
                             method:"POST",
                             data:new FormData(this),
                             contentType:false,
                             cache:false,
                             processData:false,
                             success:function(data){
+                                alert(data);
+                                // var obj = JSON.parse(data);
                                 btn.html("<i class='fa fa-spinner fa-spin'></i> Processing");
                                 setTimeout(function(){
                                     btn.html(default_btn);
-                                    $("#add_category_modal").modal("hide");
-                                    swal("Success",data,'success');
+                                    // swal({title:obj.title,text:obj.text,type:obj.type},function(){
+                                    //     location.reload();
+                                    // });
                                 },2000);
                             }
                         });

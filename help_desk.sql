@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 06, 2019 at 11:58 PM
+-- Generation Time: Feb 08, 2019 at 02:58 AM
 -- Server version: 10.1.34-MariaDB-0ubuntu0.18.04.1
 -- PHP Version: 7.2.10-0ubuntu0.18.04.1
 
@@ -67,7 +67,7 @@ CREATE TABLE `articles_tbl` (
 --
 
 INSERT INTO `articles_tbl` (`id`, `article_title`, `article_content`, `article_category`, `article_sub_category`, `user_id`, `date_created`, `article_status`) VALUES
-(1, 'ccc', '<p>zxczxc</p>', '1', '', 1, '2019-02-04 06:24:10', 1),
+(1, 'ccc', '<p>zxczxc</p>', '1', '', 1, '2019-02-08 09:48:41', 0),
 (2, 'zxczxc', '<p>zxczxc</p>', '2', '0', 1, '2019-02-04 06:24:10', 1),
 (3, 'zxczxc', '<p>zxczxczxc</p>', '1', '0', 1, '2019-02-07 00:24:01', 1);
 
@@ -94,7 +94,7 @@ INSERT INTO `article_categories_tbl` (`id`, `category_name`, `category_descripti
 (1, 'Tutorial', '<p>zxczxc</p>', '1849164580.png', '', 1),
 (2, 'zxczxc', '<p>zxczxczxc</p>', '699819354.png', '', 1),
 (3, 'zxczxc', '<p>zxczxczzxc</p>', '427791677.png', '3', 1),
-(4, 'ccc', '<p>ccc</p>', '433084486.png', '4', 1);
+(4, 'ccc', '<p>ccc</p>', '433084486.png', '4', 0);
 
 -- --------------------------------------------------------
 
@@ -142,10 +142,14 @@ CREATE TABLE `categories_tbl` (
 --
 
 INSERT INTO `categories_tbl` (`id`, `category_name`, `category_description`, `category_icon`, `user_group`, `category_status`) VALUES
-(1, 'Technical Support', '<p>This is for technical support.</p>', '292767721.png', '1', 0),
-(2, 'zz', '<p>zzz</p>', '839691243.png', '2', 0),
+(1, 'Technical Support', '<p>This is for technical support.</p>', '134483681.png', '1', 1),
+(2, 'zz', '<p>zzz</p>', '839691243.png', '2', 1),
 (3, 'zzz', '<p>zzz</p>', '1081619060.png', '2', 0),
-(4, 'zxczxc', '<p>zxczxc</p>', '236835405.png', '3', 1);
+(4, 'zxczxc', '<p>zxczxc</p>', '236835405.png', '3', 0),
+(5, 'czxc', '<p>xczxczxc</p>', '848850775.png', '2', 0),
+(6, 'zxczxc', '<p>zxczxczxc</p>', '158229665.png', '2', 0),
+(7, 'Technical Support', '<p>This is for technical support.</p>', '843785894.png', '1', 1),
+(8, 'Technical Support', '<p>This is for technical support.</p>', '279416617.png', '1', 1);
 
 -- --------------------------------------------------------
 
@@ -169,8 +173,8 @@ CREATE TABLE `custom_views_tbl` (
 --
 
 INSERT INTO `custom_views_tbl` (`id`, `name`, `status`, `category`, `order_by`, `sort_by`, `date_created`, `view_status`) VALUES
-(1, 'Default', 'All', 'All', 'ticket_title', 'ASC', '2019-02-07 00:14:57', 1),
-(2, 'All New Tickets Order by Date', '1', 'All', 'date_created', 'ASC', '2019-02-07 00:15:45', 1);
+(1, 'Default', 'All', 'All', 'ticket_title', 'ASC', '2019-02-08 09:47:51', 0),
+(2, 'All New Tickets Order by Date', '1', 'All', 'date_created', 'ASC', '2019-02-08 09:45:00', 0);
 
 -- --------------------------------------------------------
 
@@ -218,8 +222,8 @@ CREATE TABLE `faqs_tbl` (
 --
 
 INSERT INTO `faqs_tbl` (`id`, `questions`, `content`, `user_id`, `date_created`, `question_status`) VALUES
-(1, 'zxczxc', 'ccc', 1, '2019-02-07 00:31:32', 1),
-(2, 'zxc', '<p>zxczxc</p>', 1, '2019-02-04 06:51:49', 1),
+(1, 'zxczxc', 'ccc', 1, '2019-02-08 09:49:45', 0),
+(2, 'zxc', '<p>zxczxc</p>', 1, '2019-02-08 09:49:48', 0),
 (3, 'vvv', '<p>vvvvv</p>', 1, '2019-02-04 06:51:59', 1);
 
 -- --------------------------------------------------------
@@ -270,11 +274,11 @@ CREATE TABLE `status_tbl` (
 --
 
 INSERT INTO `status_tbl` (`id`, `status_name`, `bg_color`, `text_color`, `visibility_status`) VALUES
-(1, 'New', 'dc3545', 'f8f9fa', 1),
-(2, 'In Progress', '28a745', 'f8f9fa', 1),
-(3, 'Closed', '17a2b8', 'f8f9fa', 1),
-(4, 'Urgent', 'f442ee', 'ffffff', 1),
-(5, 'New Ticket', '0000ff', 'ffffff', 1),
+(1, 'New', 'dc3545', 'f8f9fa', 0),
+(2, 'In Progress', '28a745', 'f8f9fa', 0),
+(3, 'Closed', '17a2b8', 'f8f9fa', 0),
+(4, 'Urgent', 'f442ee', 'ffffff', 0),
+(5, 'New Ticket', '0000ff', 'ffffff', 0),
 (6, 'ASAP', '#f75a5f', '#f0f0f0', 1),
 (7, 'ESEP', '#000000', '#f5f5f5', 1);
 
@@ -305,7 +309,13 @@ INSERT INTO `sub_categories_tbl` (`id`, `parent_category_id`, `sub_category_name
 (4, 2, 'zxczxc', '<p>zxczxc</p>', '1394021030.png', '1', 1),
 (5, 2, 'zxczxc', '<p>zxczxc</p>', '1394021030.png', '3', 1),
 (6, 2, 'zxczxc', '<p>zxczxc</p>', '1394021030.png', '4', 1),
-(7, 1, 'zzz', '<p>zzz</p>', '940035197.png', '4', 1);
+(7, 1, 'zzz', '<p>zzz</p>', '940035197.png', '4', 1),
+(8, 1, 'zxczxczxc', '<p>zxczxczxc</p>', '461198433.png', '2', 1),
+(9, 1, 'zxczxc', '<p>zxczxc</p>', '461866901.png', '2', 1),
+(10, 1, 'zxczxc', '<p>zxczxc</p>', '1455843150.png', '2', 1),
+(11, 1, 'zxczxc', '<p>zxczxczxc</p>', '1521093762.png', '4', 1),
+(12, 1, 'zxczxc', '<p>zxczxc</p>', '1644439694.png', '2', 1),
+(13, 1, 'czxc', '<p>xczxczxc</p>', '1667206250.png', '2', 1);
 
 -- --------------------------------------------------------
 
@@ -347,7 +357,7 @@ CREATE TABLE `ticket_info_tbl` (
 --
 
 INSERT INTO `ticket_info_tbl` (`id`, `ticket_id`, `sub_category_id`, `ticket_title`, `query`, `ticket_priority`, `attachment`, `ticket_status`, `ticket_notes`, `date_created`, `visibility_status`) VALUES
-(1, 1, 1, 'My PC is not working!', '<h1><em><strong>This is a sample data</strong></em></h1>', 'high', '504607165.png', '5', '<p>This is an added note.</p>', '2019-02-04 07:09:56', 1),
+(1, 1, 1, 'My PC is not working!', '<h1><em><strong>This is a sample data</strong></em></h1>', 'high', '504607165.png', '6', '<p>This is an added note.</p>', '2019-02-04 07:09:56', 1),
 (2, 2, 2, 'cxvvxcv', '<p>czxczxc</p>', 'medium', '812743510.png', '1', '<p>zxczxczxc</p>', '2019-02-05 04:21:42', 1),
 (3, 3, 2, 'ccccc', '<p>asfasfasfasfasf</p>', 'high', '771630880.png', '3', '<p>asfsaf</p>', '2019-02-05 04:30:44', 1),
 (4, 4, 1, 'ccc', '<p>zxczxczxc</p>', 'low', '1458482123.png', '1', '<p>zxczxczxc</p>', '2019-02-06 02:46:08', 1),
@@ -532,7 +542,7 @@ ALTER TABLE `article_sub_categories_tbl`
 -- AUTO_INCREMENT for table `categories_tbl`
 --
 ALTER TABLE `categories_tbl`
-  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `custom_views_tbl`
 --
@@ -562,7 +572,7 @@ ALTER TABLE `status_tbl`
 -- AUTO_INCREMENT for table `sub_categories_tbl`
 --
 ALTER TABLE `sub_categories_tbl`
-  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `ticket_history_tbl`
 --
